@@ -128,7 +128,7 @@ def program_cortex(teensy_port="COM15", uart_port="COM18", file_binary="./code.b
 			timeout=.5)
 
 		# After programming, several lines are sent from SCM over UART
-		for _ in range(10):
+		for _ in range(30):
 			print(uart_ser.readline())
 
 		uart_ser.close()
@@ -136,14 +136,14 @@ def program_cortex(teensy_port="COM15", uart_port="COM18", file_binary="./code.b
 	return
 
 if __name__ == "__main__":
-	programmer_port = "COM15"
-	scm_port = None
+	programmer_port = "COM3"
+	scm_port = "COM12"
 
 	program_cortex_specs = dict(teensy_port=programmer_port,
-									uart_port=scm_port,
-									file_binary="./code.bin",
-									boot_mode="optical",
-									skip_reset=False,
-									insert_CRC=True,
-									pad_random_payload=False,)
+								uart_port=scm_port,
+								file_binary="./code.bin",
+								boot_mode="optical",
+								skip_reset=False,
+								insert_CRC=True,
+								pad_random_payload=False,)
 	program_cortex(**program_cortex_specs)
