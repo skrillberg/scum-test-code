@@ -180,7 +180,7 @@ int main(void) {
 	
 	
 	//enable gpio 8 and gpio 9 interrupts (interrupts 1 and 2) (gpio 9 might not work)
-	ISER = GPIO8_HIGH_INT;
+	ISER = GPIO9_LOW_INT;
 	
 	
 		// Reset RF Timer count register	
