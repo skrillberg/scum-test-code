@@ -853,6 +853,8 @@ void lh_int_cb(int level){
 		
 		//enable active low interrupt
 		ISER = GPIO9_LOW_INT;
+		//clear interrupt
+		ICPR = GPIO9_LOW_INT;
 		//
 		#if DEBUG_INT == 1
 			send_lh_packet(2,2, A, AZIMUTH);
@@ -871,6 +873,9 @@ void lh_int_cb(int level){
 		
 		//enable active high interrupt
 		ISER = GPIO8_HIGH_INT;
+		
+		//clear interrupt
+		ICPR = GPIO8_HIGH_INT;
 		
 		#if DEBUG_INT == 1
 			send_lh_packet(1,1, A, AZIMUTH);
