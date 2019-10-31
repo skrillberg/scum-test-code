@@ -197,8 +197,9 @@ int main(void) {
 
 
 	//start localization loop
-	while(1) {		
-
+	while(1) {
+		//use interrupts intesad of polling
+		/*
 		// Read GPIO<3> (optical_data_raw - this is the digital output of the optical receiver)	
 		// The optical_data_raw signal is not synchronized to HCLK domain so could possibly see glitching problems	
 		last_gpio = current_gpio;	
@@ -219,6 +220,6 @@ int main(void) {
 			timestamp_fall = RFTIMER_REG__COUNTER;	
 
 			update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);	
-		}	
+		}	*/
 	}
 }

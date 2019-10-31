@@ -881,7 +881,8 @@ void lh_int_cb(int level){
 			send_lh_packet(1,1, A, AZIMUTH);
 		#endif
 		
-		send_lh_packet(timestamp_rise,timestamp_fall,A,AZIMUTH);
+		update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
+		//send_lh_packet(timestamp_rise,timestamp_fall,A,AZIMUTH);
 		
 	}
 }
