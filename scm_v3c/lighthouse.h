@@ -11,11 +11,27 @@ typedef struct gpio_tran_t {
 	unsigned short gpio;
 	unsigned int timestamp_tran;
 }gpio_tran_t;
+
+typedef union int16_buff_t{
+	int16_t value;
+	uint16_t bytes[2];
+} int16_buff_t;
+
+typedef struct imu_data_t{
+	int16_buff_t acc_x;
+	int16_buff_t acc_y;
+	int16_buff_t acc_z;
+	int16_buff_t gyro_x;
+	int16_buff_t gyro_y;
+	int16_buff_t gyro_z;
+} imu_data_t;
+
 #define DEBUG_STATE 0
 #define DEB_THRESH 2
 #define WIDTH_BIAS 0
 #define USE_RADIO 1
 #define DEBUG_INT 0
+#define IMU_CODE 105 //code that tells code that its an imu packet
 
 //defines for lighthouse localization scum configuration
 #define HF_CLOCK_FINE_LH  		17
@@ -48,7 +64,7 @@ void radio_init_tx_lighthouse(uint8_t lo_supply_v, uint8_t lc_supply_c, uint8_t 
 void radio_init_rx_MF_lighthouse(void);
 void send_lh_packet(unsigned int sync_time, unsigned int laser_time, lh_id_t lighthouse, angle_type_t angle_type);
 void lh_int_cb(int level);
-
+void send_imu_packet(imu_data_t imu_measurement);
 //defines for initialization
 
 #define LC_CURRENT_LH 100

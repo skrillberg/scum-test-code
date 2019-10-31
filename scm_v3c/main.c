@@ -198,6 +198,21 @@ int main(void) {
 
 	//start localization loop
 	while(1) {
+		//poll imu 
+		
+		//store measurement
+		imu_data_t imu_measurement;  
+		
+		imu_measurement.acc_x.value = 200;
+		imu_measurement.acc_y.value = -200;
+		imu_measurement.acc_z.value = 1000;
+		imu_measurement.gyro_x.value = -1000; 
+		imu_measurement.gyro_y.value = -1234; 
+		imu_measurement.gyro_z.value = 1111;
+		
+		//send measurement
+		send_imu_packet(imu_measurement);
+		
 		//use interrupts intesad of polling
 		/*
 		// Read GPIO<3> (optical_data_raw - this is the digital output of the optical receiver)	
