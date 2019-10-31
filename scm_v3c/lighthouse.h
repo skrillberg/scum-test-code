@@ -29,6 +29,10 @@ typedef struct gpio_tran_t {
 #define RC2M_SUPERFINE_LH 	15
 #define LC_CODE_LH 					680
 
+//interrupt defines
+#define GPIO8_HIGH_INT 0x1000
+#define GPIO9_LOW_INT  0x2000 
+#define GPIO10_LOW_INT  0x4000 
 
 //functions
 pulse_type_t classify_pulse(unsigned int timestamp_rise, unsigned int timestamp_fall);

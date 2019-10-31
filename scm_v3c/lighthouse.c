@@ -828,3 +828,39 @@ unsigned int sync_pulse_width_compensate(unsigned int pulse_width){
 	printf("avg: %d\n",avg);
 	return 	avg;
 }
+
+//callback that is called by gpio ints
+//level parameter is what level the interrupt is at (high or low).
+void lh_int_cb(int level){
+	//Keep track of static duration level state
+	static int state = 0; 
+	static uint32_t curr_interrupt_state=0;
+	//detect edge transitions and disable level interrupts to mimic edge behavior
+	if(level == 1 && state == 0){
+	//if level high, disable high interrupt and enable low interrupt
+		state = 1;
+		
+		//disable gpio8 active high interrupt
+		ICER = GPIO8_HIGH_INT; 
+		
+		//enable active low interrupt
+		ISER = GPIO9_LOW_INT;
+		//
+	}
+	//if level low with falling edge, disable low interrupt and enable high interrupt
+	else if (level == 0 && state == 1){
+		//if level high, disable high interrupt and enable low interrupt
+		state = 0;
+		
+		//disable gpio9 active low interrupt
+		ICER = GPIO9_LOW_INT; 
+		
+		//enable active high interrupt
+		ISER = GPIO8_HIGH_INT;
+		
+		
+		
+	}
+}
+
+
