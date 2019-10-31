@@ -15,7 +15,7 @@ typedef struct gpio_tran_t {
 #define DEB_THRESH 2
 #define WIDTH_BIAS 0
 #define USE_RADIO 1
-#define DEBUG_INT 0
+#define DEBUG_INT 1
 
 //defines for lighthouse localization scum configuration
 #define HF_CLOCK_FINE_LH  		17
