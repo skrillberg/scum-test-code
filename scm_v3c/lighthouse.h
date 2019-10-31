@@ -14,7 +14,7 @@ typedef struct gpio_tran_t {
 
 typedef union int16_buff_t{
 	int16_t value;
-	uint16_t bytes[2];
+	uint8_t bytes[2];
 } int16_buff_t;
 
 typedef struct imu_data_t{
