@@ -835,9 +835,17 @@ void lh_int_cb(int level){
 	//Keep track of static duration level state
 	static int state = 0; 
 	static uint32_t curr_interrupt_state=0;
+	
+	static uint32_t timestamp_rise = 0;
+	static uint32_t timestamp_fall = 0;
+	
 	//detect edge transitions and disable level interrupts to mimic edge behavior
+	
+	//check for rising edge
 	if(level == 1 && state == 0){
-	//if level high, disable high interrupt and enable low interrupt
+		//capture rising edge
+		timestamp_rise = RFTIMER_REG__COUNTER;
+		//if level high, disable high interrupt and enable low interrupt
 		state = 1;
 		
 		//disable gpio8 active high interrupt
@@ -846,9 +854,15 @@ void lh_int_cb(int level){
 		//enable active low interrupt
 		ISER = GPIO9_LOW_INT;
 		//
+		#if DEBUG_INT == 1
+			send_lh_packet(2,2, A, AZIMUTH);
+		#endif
+		
 	}
 	//if level low with falling edge, disable low interrupt and enable high interrupt
 	else if (level == 0 && state == 1){
+		//capture falling edge
+		timestamp_fall = RFTIMER_REG__COUNTER;
 		//if level high, disable high interrupt and enable low interrupt
 		state = 0;
 		
@@ -858,6 +872,9 @@ void lh_int_cb(int level){
 		//enable active high interrupt
 		ISER = GPIO8_HIGH_INT;
 		
+		#if DEBUG_INT == 1
+			send_lh_packet(1,1, A, AZIMUTH);
+		#endif
 		
 		
 	}

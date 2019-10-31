@@ -15,6 +15,7 @@ typedef struct gpio_tran_t {
 #define DEB_THRESH 2
 #define WIDTH_BIAS 0
 #define USE_RADIO 1
+#define DEBUG_INT 1
 
 //defines for lighthouse localization scum configuration
 #define HF_CLOCK_FINE_LH  		17
@@ -46,6 +47,7 @@ void initialize_mote_lighthouse(void);
 void radio_init_tx_lighthouse(uint8_t lo_supply_v, uint8_t lc_supply_c, uint8_t pa_supply_v, bool lo_cortex_ctrl, bool div_cortex_ctrl);
 void radio_init_rx_MF_lighthouse(void);
 void send_lh_packet(unsigned int sync_time, unsigned int laser_time, lh_id_t lighthouse, angle_type_t angle_type);
+void lh_int_cb(int level);
 
 //defines for initialization
 

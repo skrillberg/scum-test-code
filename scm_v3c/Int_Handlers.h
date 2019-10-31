@@ -715,30 +715,12 @@ void INTERRUPT_GPIO3_ISR(){
 	printf("External Interrupt GPIO3 triggered\n");
 }
 void INTERRUPT_GPIO8_ISR(){
-	//ICPR = 0x0000;
-		//if (interrupt_state == 0 ){		
-			printf("External Interrupt GPIO8 triggered\n");
-			send_lh_packet(2,2, A, AZIMUTH);
-			interrupt_state = 1;
-			//disable gpio8 active high interrupt
-		ICER = GPIO8_HIGH_INT; 
-		
-		//enable active low interrupt
-		ISER = GPIO9_LOW_INT;
-		//}
+	//call lh cb for high level
+	lh_int_cb(1);
 }
 void INTERRUPT_GPIO9_ISR(){
-	//ICPR = 0x0000;
-	//if(interrupt_state != 0){
-		printf("External Interrupt GPIO9 triggered\n");
-		send_lh_packet(1, 1, A, AZIMUTH);
-		interrupt_state = 0;
-			//disable gpio9 active low interrupt
-		ICER = GPIO9_LOW_INT; 
-		
-		//enable active high interrupt
-		ISER = GPIO8_HIGH_INT;
-	//}
+	//call lh cb for low level
+	lh_int_cb(0);
 }
 void INTERRUPT_GPIO10_ISR(){
 	printf("External Interrupt GPIO10 triggered\n");
