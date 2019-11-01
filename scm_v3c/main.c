@@ -213,7 +213,7 @@ int main(void) {
 		//send measurement
 		for( i = 0; i < 10000; i++){
 		}
-		send_imu_packet(imu_measurement);
+		//send_imu_packet(imu_measurement);
 		
 		//use interrupts intesad of polling
 		/*

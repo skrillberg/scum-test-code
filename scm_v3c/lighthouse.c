@@ -15,7 +15,7 @@
 
 extern char send_packet[127];
 
-static bool tx_busy = false;
+static bool lh_packet_ready;
 
 //functions//
 void initialize_mote_lighthouse(){
@@ -25,8 +25,8 @@ void initialize_mote_lighthouse(){
 	extern unsigned int ASC[38];	// this is a little sketchy
 	
 	int t;
-	
-	tx_busy = false;
+	lh_packet_ready = false;
+
 	// RF Timer rolls over at this value and starts a new cycle
 	RFTIMER_REG__MAX_COUNT = 0xFFFFFFFF;
 
@@ -387,7 +387,9 @@ void send_lh_packet(unsigned int sync_time, unsigned int laser_time, lh_id_t lig
 					send_packet[6] = (laser_time>>8) & 0xFF;
 					send_packet[7] = (laser_time>>16) & 0xFF;
 					send_packet[8] = (laser_time>>24) & 0xFF;
-	
+					for(i = 0; i<1000; i++){
+						
+					}
 					//call "radio_loadpacket", which puts array into hardware fifo (takes time)
 					radio_loadPacket(9);
 					
@@ -395,7 +397,7 @@ void send_lh_packet(unsigned int sync_time, unsigned int laser_time, lh_id_t lig
 					//LC_FREQCHANGE(22&0x1F, 21&0x1F, 4&0x1F); //for no pa
 					LC_FREQCHANGE(23&0x1F, 2&0x1F, 6&0x1F); //for pa
 					
-					for(i = 0; i<100; i++){
+					for(i = 0; i<200; i++){
 						
 					}
 					//transmit packet (radio_txnow) (wait 50 us between tx enable and tx_now)
@@ -838,8 +840,9 @@ unsigned int sync_pulse_width_compensate(unsigned int pulse_width){
 void lh_int_cb(int level){
 	//Keep track of static duration level state
 	static int state = 0; 
-	static uint32_t curr_interrupt_state=0;
-	
+	static bool debounced=false;
+	static uint8_t debounce_count_high=0;
+	static uint8_t debounce_count_low=0;
 	static uint32_t timestamp_rise = 0;
 	static uint32_t timestamp_fall = 0;
 	
@@ -847,23 +850,34 @@ void lh_int_cb(int level){
 	
 	//check for rising edge
 	if(level == 1 && state == 0){
+		if(debounce_count_high == 0){
 		//capture rising edge
 		timestamp_rise = RFTIMER_REG__COUNTER;
-		//if level high, disable high interrupt and enable low interrupt
-		state = 1;
 		
-		//disable gpio8 active high interrupt
-		ICER = GPIO8_HIGH_INT; 
+		}
 		
-		//enable active low interrupt
-		ISER = GPIO9_LOW_INT;
-		//clear interrupt
-		ICPR = GPIO9_LOW_INT;
-		//
-		#if DEBUG_INT == 1
-			send_lh_packet(2,2, A, AZIMUTH);
-		#endif
+		//increment debounce count
+		debounce_count_high++;
 		
+		if(debounce_count_high>3){
+			
+			//reset debounce count
+			debounce_count_high =  0;
+			//if level high, disable high interrupt and enable low interrupt
+			state = 1;
+			
+			//disable gpio8 active high interrupt
+			ICER = GPIO8_HIGH_INT; 
+			
+			//enable active low interrupt
+			ISER = GPIO9_LOW_INT;
+			//clear interrupt
+			ICPR = GPIO9_LOW_INT;
+			//
+			#if DEBUG_INT == 1
+				send_lh_packet(2,2, A, AZIMUTH);
+			#endif
+		}
 	}
 	//if level low with falling edge, disable low interrupt and enable high interrupt
 	else if (level == 0 && state == 1){
