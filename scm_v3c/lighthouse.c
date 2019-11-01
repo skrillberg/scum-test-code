@@ -881,27 +881,39 @@ void lh_int_cb(int level){
 	}
 	//if level low with falling edge, disable low interrupt and enable high interrupt
 	else if (level == 0 && state == 1){
-		//capture falling edge
-		timestamp_fall = RFTIMER_REG__COUNTER;
-		//if level high, disable high interrupt and enable low interrupt
-		state = 0;
-		
-		//disable gpio9 active low interrupt
-		ICER = GPIO9_LOW_INT; 
-		
-		//enable active high interrupt
-		ISER = GPIO8_HIGH_INT;
-		
-		//clear interrupt
-		ICPR = GPIO8_HIGH_INT;
-		
-		#if DEBUG_INT == 1
-			send_lh_packet(1,1, A, AZIMUTH);
-		#endif
-		
-		update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
-		//send_lh_packet(timestamp_rise,timestamp_fall,A,AZIMUTH);
-		
+		//capture edge on first edge
+		if(debounce_count_low== 0){
+			//capture falling edge
+			timestamp_fall = RFTIMER_REG__COUNTER;
+		}
+
+		//increment debounce counter
+		debounce_count_low++;
+
+		if(debounce_count_high>1){
+			
+			//reset debounce count
+			debounce_count_low =  0;
+			
+			//if level high, disable high interrupt and enable low interrupt
+			state = 0;
+			
+			//disable gpio9 active low interrupt
+			ICER = GPIO9_LOW_INT; 
+			
+			//enable active high interrupt
+			ISER = GPIO8_HIGH_INT;
+			
+			//clear interrupt
+			ICPR = GPIO8_HIGH_INT;
+			
+			#if DEBUG_INT == 1
+				send_lh_packet(1,1, A, AZIMUTH);
+			#endif
+			
+			update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
+			//send_lh_packet(timestamp_rise,timestamp_fall,A,AZIMUTH);
+		}
 	}
 }
 
