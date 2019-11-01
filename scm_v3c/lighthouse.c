@@ -901,12 +901,12 @@ void send_imu_packet(imu_data_t imu_measurement){
 	send_packet[0] = IMU_CODE;
 	
 	//place imu acc x data into the rest of the packet (lsb first)
-	send_packet[1] = 12;
-	send_packet[2] = 15;
+	send_packet[1] = 'a';
+	send_packet[2] = 'b';
 	
 	//place acceleration y data into packet
-	send_packet[2] = imu_measurement.acc_y.bytes[0];
-	send_packet[3] = imu_measurement.acc_y.bytes[1];
+	send_packet[2] = 'c';
+	send_packet[3] = 'd';
 	
 	//place acceleration z data into packet
 	send_packet[4] = imu_measurement.acc_z.bytes[0];
