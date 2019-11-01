@@ -203,7 +203,7 @@ int main(void) {
 		//store measurement
 		imu_data_t imu_measurement;  
 		
-		test_imu_life();
+		//test_imu_life();
 		
 		imu_measurement.acc_x.value = 200;
 		imu_measurement.acc_y.value = -200;
@@ -215,7 +215,7 @@ int main(void) {
 		//send measurement
 		for( i = 0; i < 10000; i++){
 		}
-		//send_imu_packet(imu_measurement);
+		send_imu_packet(imu_measurement);
 		
 		//use interrupts intesad of polling
 		/*
