@@ -859,7 +859,7 @@ void lh_int_cb(int level){
 		//increment debounce count
 		debounce_count_high++;
 		
-		if(debounce_count_high>1){
+		if(debounce_count_high>=DEB_THRESH){
 			
 			//reset debounce count
 			debounce_count_high =  0;
@@ -890,7 +890,7 @@ void lh_int_cb(int level){
 		//increment debounce counter
 		debounce_count_low++;
 
-		if(debounce_count_high>1){
+		if(debounce_count_low>=DEB_THRESH){
 			
 			//reset debounce count
 			debounce_count_low =  0;
