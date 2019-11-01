@@ -27,7 +27,7 @@ typedef struct imu_data_t{
 } imu_data_t;
 
 #define DEBUG_STATE 0
-#define DEB_THRESH 3
+#define DEB_THRESH 2
 #define WIDTH_BIAS 0
 #define USE_RADIO 1
 #define DEBUG_INT 0
