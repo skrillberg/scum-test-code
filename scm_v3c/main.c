@@ -195,13 +195,15 @@ int main(void) {
 	last_gpio = current_gpio;	
 	current_gpio = (0x8 & GPIO_REG__INPUT) >> 3;	
 
-
+	
 	//start localization loop
 	while(1) {
 		//poll imu 
 		
 		//store measurement
 		imu_data_t imu_measurement;  
+		
+		test_imu_life();
 		
 		imu_measurement.acc_x.value = 200;
 		imu_measurement.acc_y.value = -200;
