@@ -15,14 +15,18 @@
 
 extern char send_packet[127];
 
+static bool tx_busy = false;
+
 //functions//
 void initialize_mote_lighthouse(){
 	
 
+
 	extern unsigned int ASC[38];	// this is a little sketchy
 	
 	int t;
-
+	
+	tx_busy = false;
 	// RF Timer rolls over at this value and starts a new cycle
 	RFTIMER_REG__MAX_COUNT = 0xFFFFFFFF;
 
