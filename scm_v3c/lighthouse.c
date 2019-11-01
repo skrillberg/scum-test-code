@@ -905,28 +905,28 @@ void send_imu_packet(imu_data_t imu_measurement){
 	send_packet[2] = 'b';
 	
 	//place acceleration y data into packet
-	send_packet[2] = 'c';
-	send_packet[3] = 'd';
+	send_packet[3] = 'c';
+	send_packet[4] = 'd';
 	
 	//place acceleration z data into packet
-	send_packet[4] = imu_measurement.acc_z.bytes[0];
-	send_packet[5] = imu_measurement.acc_z.bytes[1];
+	send_packet[5] = imu_measurement.acc_z.bytes[0];
+	send_packet[6] = imu_measurement.acc_z.bytes[1];
 	
 	//place gyro x data into packet
-	send_packet[6] = imu_measurement.gyro_x.bytes[0];
-	send_packet[7] = imu_measurement.gyro_x.bytes[1];
+	send_packet[7] = imu_measurement.gyro_x.bytes[0];
+	send_packet[8] = imu_measurement.gyro_x.bytes[1];
 	
 	//place gyro y data into packet
-	send_packet[8] = imu_measurement.gyro_y.bytes[0];
-	send_packet[9] = imu_measurement.gyro_y.bytes[1];
+	send_packet[9] = imu_measurement.gyro_y.bytes[0];
+	send_packet[10] = imu_measurement.gyro_y.bytes[1];
 	
 	//place gyro z data into packet
-	send_packet[10] = imu_measurement.gyro_z.bytes[0];
-	send_packet[11] = imu_measurement.gyro_z.bytes[1];
+	send_packet[11] = imu_measurement.gyro_z.bytes[0];
+	send_packet[12] = imu_measurement.gyro_z.bytes[1];
 	
 	
 	//load packet
-	radio_loadPacket(12);
+	radio_loadPacket(13);
 	
 	//set lo frequency
 	LC_FREQCHANGE(23&0x1F, 2&0x1F, 6&0x1F); //for pa
