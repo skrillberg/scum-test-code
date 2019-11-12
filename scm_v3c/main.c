@@ -85,19 +85,24 @@ void test_LC_sweep_tx(void) {
 	radio_txEnable();
 	
 	while (1) {
-		for (coarse=22; coarse<25; coarse++) {
+		for (coarse=20; coarse<27; coarse++) {
 			for (mid=0; mid<32; mid++) {
 				for (fine=0; fine<32; fine++) {
 					// Construct the packet 
 					// with payload {coarse, mid, fine} in 
 					// separate bytes
+					
 					send_packet[0] = coarse & 0x1F;
 					send_packet[1] = mid & 0x1F;
 					send_packet[2] = fine & 0x1F;
 					send_packet[4] = 53;
 					send_packet[5] = 53;
-					radio_loadPacket(5);
-
+					send_packet[6] = 0xAA;
+					send_packet[7] =  0xAA;
+					send_packet[8] =  0xAA;
+					
+					radio_loadPacket(9);
+					
 					// Set the LC frequency
 					//LC_FREQCHANGE(22&0x1F, 21&0x1F, 4&0x1F);
 					LC_FREQCHANGE(coarse&0x1F, mid&0x1F, fine&0x1F);
