@@ -188,15 +188,16 @@ int main(void) {
 
 	ICER = 0xFFFF;
 	printf("Cal complete\n");
-			
-
+		while(1){	
+			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
+		}
 	//run frequency cal sweep
-	//test_LC_sweep_tx();
+	test_LC_sweep_tx();
 	
 	
 	
 	//enable gpio 8 and gpio 9 interrupts (interrupts 1 and 2) (gpio 9 might not work)
-	//ISER = GPIO9_LOW_INT|GPIO8_HIGH_INT;
+	ISER = GPIO9_LOW_INT|GPIO8_HIGH_INT;
 	
 	
 		// Reset RF Timer count register	
@@ -219,7 +220,7 @@ int main(void) {
 		//store measurement
 		imu_data_t imu_measurement;  
 		
-				GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
+				
 		//test_imu_life();
 		
 		imu_measurement.acc_x.value = 200;
