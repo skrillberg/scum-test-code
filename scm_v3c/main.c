@@ -188,11 +188,9 @@ int main(void) {
 
 	ICER = 0xFFFF;
 	printf("Cal complete\n");
-		while(1){	
-			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
-		}
+
 	//run frequency cal sweep
-	test_LC_sweep_tx();
+	//test_LC_sweep_tx();
 	
 	
 	
@@ -212,7 +210,9 @@ int main(void) {
 	last_gpio = current_gpio;	
 	current_gpio = (0x8 & GPIO_REG__INPUT) >> 3;	
 
-	
+	while(1){	
+			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
+		}
 	//start localization loop
 	while(1) {
 		//poll imu 
