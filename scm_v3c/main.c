@@ -165,9 +165,10 @@ int main(void) {
 		}
 	}
 	
+	/*
 		while(1){
 			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
-		}
+		}*/
 	
 	// After bootloading the next thing that happens is frequency calibration using optical
 	printf("Calibrating frequencies...\n");
