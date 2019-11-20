@@ -88,6 +88,8 @@ void test_LC_sweep_tx(void) {
 		for (coarse=20; coarse<27; coarse++) {
 			for (mid=0; mid<32; mid++) {
 				for (fine=0; fine<32; fine++) {
+					
+					GPIO_REG__OUTPUT = (fine % 2) << 4;
 					// Construct the packet 
 					// with payload {coarse, mid, fine} in 
 					// separate bytes
@@ -195,7 +197,7 @@ int main(void) {
 	// Number of data points to gather before printing		
 	target_num_data_points = 120;
 	
-	//test_LC_sweep_tx();
+	test_LC_sweep_tx();
 	// The optical_data_raw signal is not synchronized to HCLK domain so could possibly see glitching problems	
 	last_gpio = current_gpio;	
 	current_gpio = (0x8 & GPIO_REG__INPUT) >> 3;	
