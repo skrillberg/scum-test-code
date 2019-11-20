@@ -200,6 +200,7 @@ unsigned char flipChar(unsigned char b) {
 	return b;
 }
 
+//which row is which?
 void GPO_control( char row1,  char row2,  char row3,  char row4) {
 	
 	int j;
