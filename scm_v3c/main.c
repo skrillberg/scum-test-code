@@ -161,14 +161,11 @@ int main(void) {
 	else{
 		printf("\nProgramming Error - CRC DOES NOT MATCH - Halting Execution\n");
 		while(1){
-			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
+			//GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
 		}
 	}
 	
-	/*
-		while(1){
-			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
-		}*/
+
 	
 	// After bootloading the next thing that happens is frequency calibration using optical
 	printf("Calibrating frequencies...\n");
@@ -189,7 +186,10 @@ int main(void) {
 	// Enable optical SFD interrupt for optical calibration
 	ISER = 0x0800;
 	
-	
+		
+		while(1){
+			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
+		}
 	// Wait for optical cal to finish
 	while(optical_cal_finished == 0);
 	optical_cal_finished = 0;
