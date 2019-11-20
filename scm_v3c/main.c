@@ -75,7 +75,7 @@ void test_LC_sweep_tx(void) {
 		Initialization of the scan settings should already have 
 		been performed.
 	*/
-
+	int gpo_state = 0;
 	int coarse, mid, fine;
 	unsigned int iterations = 3;
 	unsigned int i;
@@ -85,11 +85,21 @@ void test_LC_sweep_tx(void) {
 	radio_txEnable();
 	
 	while (1) {
+		
+		//gpo toggle on all gpos
+		if(gpo_state == 0){
+			GPIO_REG__OUTPUT = 0xFFFF;
+			gpo_state = 1;
+		}
+		else{
+			GPIO_REG__OUTPUT = 0;
+			gpo_state = 0;
+		}
 		for (coarse=20; coarse<27; coarse++) {
 			for (mid=0; mid<32; mid++) {
 				for (fine=0; fine<32; fine++) {
 					
-					GPIO_REG__OUTPUT = (fine % 2) << 4;
+					
 					// Construct the packet 
 					// with payload {coarse, mid, fine} in 
 					// separate bytes
