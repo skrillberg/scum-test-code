@@ -86,15 +86,9 @@ void test_LC_sweep_tx(void) {
 	
 	while (1) {
 		
+		GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
 		//gpo toggle on all gpos
-		if(gpo_state == 0){
-			GPIO_REG__OUTPUT = 0xFFFF;
-			gpo_state = 1;
-		}
-		else{
-			GPIO_REG__OUTPUT = 0;
-			gpo_state = 0;
-		}
+
 		for (coarse=20; coarse<27; coarse++) {
 			for (mid=0; mid<32; mid++) {
 				for (fine=0; fine<32; fine++) {
@@ -194,9 +188,7 @@ int main(void) {
 	ICER = 0xFFFF;
 	printf("Cal complete\n");
 			
-		while(1){
-			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
-		}
+
 	//run frequency cal sweep
 	test_LC_sweep_tx();
 	
