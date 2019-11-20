@@ -86,8 +86,7 @@ void test_LC_sweep_tx(void) {
 	
 	while (1) {
 		
-		GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
-		//gpo toggle on all gpos
+
 
 		for (coarse=20; coarse<27; coarse++) {
 			for (mid=0; mid<32; mid++) {
@@ -113,6 +112,8 @@ void test_LC_sweep_tx(void) {
 					//LC_FREQCHANGE(22&0x1F, 21&0x1F, 4&0x1F);
 					LC_FREQCHANGE(coarse&0x1F, mid&0x1F, fine&0x1F);
 					// TODO: Wait for at least 50us
+					GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
+					//gpo toggle on all gpos
 					for (i=0; i<5000; i++) {}
 
 					// Send bits out the radio thrice for redundancy
