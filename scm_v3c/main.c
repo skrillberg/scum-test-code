@@ -210,9 +210,7 @@ int main(void) {
 	last_gpio = current_gpio;	
 	current_gpio = (0x8 & GPIO_REG__INPUT) >> 3;	
 
-	while(1){	
-			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
-		}
+
 	//start localization loop
 	while(1) {
 		//poll imu 
@@ -222,7 +220,7 @@ int main(void) {
 		
 				
 		//test_imu_life();
-		
+		GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
 		imu_measurement.acc_x.value = 200;
 		imu_measurement.acc_y.value = -200;
 		imu_measurement.acc_z.value = 1000;
