@@ -160,10 +160,15 @@ int main(void) {
 	}
 	else{
 		printf("\nProgramming Error - CRC DOES NOT MATCH - Halting Execution\n");
-		while(1);
+		while(1){
+			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
+		}
 	}
 	
-
+		while(1){
+			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
+		}
+	
 	// After bootloading the next thing that happens is frequency calibration using optical
 	printf("Calibrating frequencies...\n");
 	
