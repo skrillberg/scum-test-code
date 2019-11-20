@@ -186,17 +186,17 @@ int main(void) {
 	// Enable optical SFD interrupt for optical calibration
 	ISER = 0x0800;
 	
-		
-		while(1){
-			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
-		}
+
 	// Wait for optical cal to finish
 	while(optical_cal_finished == 0);
 	optical_cal_finished = 0;
 
 	ICER = 0xFFFF;
 	printf("Cal complete\n");
-	
+			
+		while(1){
+			GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
+		}
 	//run frequency cal sweep
 	test_LC_sweep_tx();
 	
