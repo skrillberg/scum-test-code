@@ -191,12 +191,12 @@ int main(void) {
 			
 
 	//run frequency cal sweep
-	test_LC_sweep_tx();
+	//test_LC_sweep_tx();
 	
 	
 	
 	//enable gpio 8 and gpio 9 interrupts (interrupts 1 and 2) (gpio 9 might not work)
-	ISER = GPIO9_LOW_INT|GPIO8_HIGH_INT;
+	//ISER = GPIO9_LOW_INT|GPIO8_HIGH_INT;
 	
 	
 		// Reset RF Timer count register	
@@ -206,7 +206,7 @@ int main(void) {
 	// Number of data points to gather before printing		
 	target_num_data_points = 120;
 	
-	test_LC_sweep_tx();
+	//test_LC_sweep_tx();
 	// The optical_data_raw signal is not synchronized to HCLK domain so could possibly see glitching problems	
 	last_gpio = current_gpio;	
 	current_gpio = (0x8 & GPIO_REG__INPUT) >> 3;	
@@ -215,10 +215,11 @@ int main(void) {
 	//start localization loop
 	while(1) {
 		//poll imu 
-		
+
 		//store measurement
 		imu_data_t imu_measurement;  
 		
+				GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
 		//test_imu_life();
 		
 		imu_measurement.acc_x.value = 200;
