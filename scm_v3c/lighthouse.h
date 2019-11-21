@@ -33,6 +33,7 @@ typedef struct imu_data_t{
 #define DEBUG_INT 0
 #define IMU_CODE 105 //code that tells code that its an imu packet
 
+
 //defines for lighthouse localization scum configuration
 #define HF_CLOCK_FINE_LH  		17
 #define HF_CLOCK_COARSE_LH 		3

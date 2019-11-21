@@ -79,7 +79,18 @@ void test_LC_sweep_tx(void) {
 	int coarse, mid, fine;
 	unsigned int iterations = 3;
 	unsigned int i;
+		//store measurement
+	imu_data_t imu_measurement;  
+	
 
+	//test_imu_life();
+	imu_measurement.acc_x.value = 200;
+	imu_measurement.acc_y.value = -200;
+	imu_measurement.acc_z.value = 1000;
+	imu_measurement.gyro_x.value = -1000; 
+	imu_measurement.gyro_y.value = -1234; 
+	imu_measurement.gyro_z.value = 1111;
+	
 	// Enable the TX. NB: Requires 50us for frequency settling
 	// transient.
 	radio_txEnable();
@@ -118,7 +129,7 @@ void test_LC_sweep_tx(void) {
 
 					// Send bits out the radio thrice for redundancy
 					for(i=0; i<iterations; i++) {
-						radio_txNow();
+						send_imu_packet(imu_measurement);
 					}
 				}
 			}
@@ -190,7 +201,7 @@ int main(void) {
 	printf("Cal complete\n");
 
 	//run frequency cal sweep
-	//test_LC_sweep_tx();
+	test_LC_sweep_tx();
 	
 	
 	
