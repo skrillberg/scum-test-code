@@ -397,7 +397,7 @@ void send_lh_packet(unsigned int sync_time, unsigned int laser_time, lh_id_t lig
 					//LC_FREQCHANGE(22&0x1F, 21&0x1F, 4&0x1F); //for no pa
 					//LC_FREQCHANGE(23&0x1F, 2&0x1F, 6&0x1F); //for pa
 					
-					LC_FREQCHANGE(23&0x1F, 21&0x1F, 8&0x1F); //qx3
+					LC_FREQCHANGE(23&0x1F, 21&0x1F, 3&0x1F); //qx3
 					for(i = 0; i<200; i++){
 						
 					}
@@ -957,7 +957,8 @@ void send_imu_packet(imu_data_t imu_measurement){
 	
 	//set lo frequency
 	//original: LC_FREQCHANGE(23&0x1F, 2&0x1F, 6&0x1F); //for pa
-	LC_FREQCHANGE(23&0x1F, 21&0x1F, 8&0x1F);
+	//LC_FREQCHANGE(23&0x1F, 21&0x1F, 8&0x1F);
+	LC_FREQCHANGE(23&0x1F, 21&0x1F, 3&0x1F);
 	//wait for 1000 loop cycles
 	
 	for(i = 0; i<100; i++){

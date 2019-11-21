@@ -499,6 +499,7 @@ void set_IF_LDO_voltage(int code){
 
 // Change the reference voltage for the VDDD LDO
 // 0 <= code <= 127
+// lower code means higher voltage
 void set_VDDD_LDO_voltage(int code){
 
 	unsigned int j;
