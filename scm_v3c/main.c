@@ -201,7 +201,7 @@ int main(void) {
 	printf("Cal complete\n");
 
 	//run frequency cal sweep
-	test_LC_sweep_tx();
+	//test_LC_sweep_tx();
 	
 	
 	
