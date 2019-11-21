@@ -190,7 +190,7 @@ int main(void) {
 	printf("Cal complete\n");
 
 	//run frequency cal sweep
-	test_LC_sweep_tx();
+	//test_LC_sweep_tx();
 	
 	
 	
@@ -220,7 +220,7 @@ int main(void) {
 		
 				
 		//test_imu_life();
-
+		GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
 		imu_measurement.acc_x.value = 200;
 		imu_measurement.acc_y.value = -200;
 		imu_measurement.acc_z.value = 1000;
