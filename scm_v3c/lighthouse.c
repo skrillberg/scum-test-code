@@ -46,7 +46,7 @@ void initialize_mote_lighthouse(){
 	init_ldo_control();
 
 	// Set LDO reference voltages
-	set_VDDD_LDO_voltage(250);
+	set_VDDD_LDO_voltage(126);
 	//set_AUX_LDO_voltage(0);
 	set_ALWAYSON_LDO_voltage(0);
 		
