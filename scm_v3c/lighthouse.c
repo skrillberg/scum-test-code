@@ -956,7 +956,7 @@ void send_imu_packet(imu_data_t imu_measurement){
 	
 	//set lo frequency
 	//original: LC_FREQCHANGE(23&0x1F, 2&0x1F, 6&0x1F); //for pa
-	LC_FREQCHANGE(23&0x1F, 21&0x1F, 15&0x1F);
+	LC_FREQCHANGE(23&0x1F, 21&0x1F, 12&0x1F);
 	//wait for 1000 loop cycles
 	
 	for(i = 0; i<100; i++){
