@@ -46,9 +46,9 @@ void initialize_mote_lighthouse(){
 	init_ldo_control();
 
 	// Set LDO reference voltages
-	//set_VDDD_LDO_voltage(0);
+	set_VDDD_LDO_voltage(200);
 	//set_AUX_LDO_voltage(0);
-	set_ALWAYSON_LDO_voltage(150);
+	set_ALWAYSON_LDO_voltage(0);
 		
 	// Select banks for GPIO inputs
 	//GPI_control(0,0,0,0);
