@@ -48,8 +48,8 @@ void initialize_mote_lighthouse(){
 	// Set LDO reference voltages
 	set_VDDD_LDO_voltage(63);
 	//set_AUX_LDO_voltage(0);
-	set_ALWAYSON_LDO_voltage(0x60);
-		
+	//set_ALWAYSON_LDO_voltage(0x60);
+		set_ALWAYSON_LDO_voltage(120);
 	// Select banks for GPIO inputs
 	//GPI_control(0,0,0,0);
 	
@@ -961,7 +961,7 @@ void send_imu_packet(imu_data_t imu_measurement){
 	LC_FREQCHANGE(23&0x1F, 21&0x1F, 3&0x1F);
 	//wait for 1000 loop cycles
 	
-	for(i = 0; i<100; i++){
+	for(i = 0; i<1000; i++){
 		
 	}
 	
