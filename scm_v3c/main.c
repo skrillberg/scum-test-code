@@ -103,25 +103,45 @@ void test_LC_sweep_tx(void) {
 			for (mid=0; mid<32; mid++) {
 				for (fine=0; fine<32; fine++) {
 					
-					
+					imu_measurement.acc_x.value = coarse & 0x1F;
+					imu_measurement.acc_y.value = mid & 0x1F;
+					imu_measurement.acc_z.value = fine & 0x1F;
 					// Construct the packet 
 					// with payload {coarse, mid, fine} in 
 					// separate bytes
 					
-					send_packet[0] = coarse & 0x1F;
-					send_packet[1] = mid & 0x1F;
-					send_packet[2] = fine & 0x1F;
-					send_packet[4] = 53;
-					send_packet[5] = 53;
-					send_packet[6] = 0xAA;
-					send_packet[7] =  0xAA;
-					send_packet[8] =  0xAA;
+					//place packet type code in first byte of packet
+					send_packet[0] = IMU_CODE;
 					
-					radio_loadPacket(9);
+					//place imu acc x data into the rest of the packet (lsb first)
+					send_packet[1] = imu_measurement.acc_x.bytes[0];
+					send_packet[2] = imu_measurement.acc_x.bytes[1];
 					
-					imu_measurement.acc_x.value = coarse & 0x1F;
-					imu_measurement.acc_y.value = mid & 0x1F;
-					imu_measurement.acc_z.value = fine & 0x1F;
+					//place acceleration y data into packet
+					send_packet[3] = imu_measurement.acc_y.bytes[0];
+					send_packet[4] = imu_measurement.acc_y.bytes[1];
+					
+					//place acceleration z data into packet
+					send_packet[5] = imu_measurement.acc_z.bytes[0];
+					send_packet[6] = imu_measurement.acc_z.bytes[1];
+					
+					//place gyro x data into packet
+					send_packet[7] = imu_measurement.gyro_x.bytes[0];
+					send_packet[8] = imu_measurement.gyro_x.bytes[1];
+					
+					//place gyro y data into packet
+					send_packet[9] = imu_measurement.gyro_y.bytes[0];
+					send_packet[10] = imu_measurement.gyro_y.bytes[1];
+					
+					//place gyro z data into packet
+					send_packet[11] = imu_measurement.gyro_z.bytes[0];
+					send_packet[12] = imu_measurement.gyro_z.bytes[1];
+					
+					
+					//load packet
+					radio_loadPacket(13);
+					
+
 					
 					// Set the LC frequency
 					//LC_FREQCHANGE(22&0x1F, 21&0x1F, 4&0x1F);
