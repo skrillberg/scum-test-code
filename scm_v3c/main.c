@@ -119,6 +119,10 @@ void test_LC_sweep_tx(void) {
 					
 					radio_loadPacket(9);
 					
+					imu_measurement.acc_x.value = coarse & 0x1F;
+					imu_measurement.acc_y.value = mid & 0x1F;
+					imu_measurement.acc_z.value = fine & 0x1F;
+					
 					// Set the LC frequency
 					//LC_FREQCHANGE(22&0x1F, 21&0x1F, 4&0x1F);
 					LC_FREQCHANGE(coarse&0x1F, mid&0x1F, fine&0x1F);
@@ -201,7 +205,7 @@ int main(void) {
 	printf("Cal complete\n");
 
 	//run frequency cal sweep
-	//test_LC_sweep_tx();
+	test_LC_sweep_tx();
 	
 	
 	
