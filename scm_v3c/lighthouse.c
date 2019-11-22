@@ -13,7 +13,7 @@
 #include "Memory_map.h"
 #include <stdbool.h>
 
-#define QX3_FINE 2
+#define QX3_FINE 0
 #define QX3_MID 20
 extern char send_packet[127];
 
