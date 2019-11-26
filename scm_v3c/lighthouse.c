@@ -15,7 +15,7 @@
 
 #define QX3_FINE 0
 #define QX3_MID 20
-#define HCLOCK_ERROR 9/10
+#define HCLOCK_ERROR 924/1000
 extern char send_packet[127];
 
 static bool lh_packet_ready;
