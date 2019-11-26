@@ -15,6 +15,7 @@
 
 #define QX3_FINE 0
 #define QX3_MID 20
+#define HCLOCK_ERROR 9/10
 extern char send_packet[127];
 
 static bool lh_packet_ready;
@@ -410,7 +411,7 @@ pulse_type_t classify_pulse(unsigned int timestamp_rise, unsigned int timestamp_
   pulse_type_t pulse_type;
 	unsigned int pulse_width;
 	
-	pulse_width = timestamp_fall - timestamp_rise;
+	pulse_width = (timestamp_fall - timestamp_rise)*HCLOCK_ERROR;
 	pulse_type = INVALID;
 
 	// Identify what kind of pulse this was
@@ -502,7 +503,7 @@ void debounce_gpio(unsigned short gpio, unsigned short * gpio_out, unsigned int 
 //keeps track of the current state and will print out pulse train information when it's done.
 void update_state(pulse_type_t pulse_type, unsigned int timestamp_rise){
 	
-
+	
 	
 	if(pulse_type == INVALID){
 		return;
