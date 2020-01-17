@@ -6,7 +6,8 @@ void spi_write(unsigned char writeByte) {
 	int j;
 	int t=0;
 	int clk_pin = 14;
-	int data_pin = 13;
+	int data_pin = 12;
+	
 	for (j=7;j>=0;j--) {
 		if ((writeByte&(0x01<<j)) != 0) {
 			GPIO_REG__OUTPUT &= ~(1 << clk_pin); // clock low
@@ -20,19 +21,23 @@ void spi_write(unsigned char writeByte) {
 		}
 	}
 	
-	GPIO_REG__OUTPUT &= 0xFFFFEFFF; // set data out to 0
+	GPIO_REG__OUTPUT &= ~(1 << data_pin); // set data out to 0
 }
 unsigned char spi_read() {
 	unsigned char readByte;
 	int j;
 	int t = 0;
+	int clk_pin = 14;
+	int din_pin = 13;
 	readByte=0;
-	GPIO_REG__OUTPUT &= 0xFFFFBFFF; // clock low
+
+	
+	GPIO_REG__OUTPUT &= ~(1 << clk_pin); // clock low
 	
 	for (j=7;j>=0;j--) {
-		GPIO_REG__OUTPUT |= 0x00004000; // clock high
-		readByte |= ((GPIO_REG__INPUT&0x00002000)>>10)<<j;		
-		GPIO_REG__OUTPUT &= 0xFFFFBFFF; // clock low		
+		GPIO_REG__OUTPUT |= (1 << clk_pin); // clock high
+		readByte |= ((GPIO_REG__INPUT&(1 << din_pin))>>10)<<j;		
+		GPIO_REG__OUTPUT &= ~(1 << clk_pin); // clock low		
 	}
 	
 	return readByte;
@@ -40,15 +45,18 @@ unsigned char spi_read() {
 
 void spi_chip_select() {
 	int t = 0;
+	int dout_pin = 12;
+	int cs_pin = 15;
 	// drop chip select low to select the chip
-	GPIO_REG__OUTPUT &= 0xFFFF7FFF;
-	GPIO_REG__OUTPUT &= 0xFFFFEFFF;
+	GPIO_REG__OUTPUT &= ~(1 << cs_pin);
+	GPIO_REG__OUTPUT &= ~(1 << dout_pin);
 	for(t=0; t<50; t++);
 }
 
 void spi_chip_deselect() {
+	int cs_pin = 15;
 	// hold chip select high to deselect the chip
-	GPIO_REG__OUTPUT |= 0x00008000;
+	GPIO_REG__OUTPUT |= (1 << cs_pin);
 }
 
 unsigned int read_acc_x() {
