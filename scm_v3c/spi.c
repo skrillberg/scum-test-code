@@ -6,7 +6,7 @@ void spi_write(unsigned char writeByte) {
 	int j;
 	int t=0;
 	int clk_pin = 14;
-	int data_pin = 12;
+	int data_pin = 13;
 	for (j=7;j>=0;j--) {
 		if ((writeByte&(0x01<<j)) != 0) {
 			GPIO_REG__OUTPUT &= ~(1 << clk_pin); // clock low
