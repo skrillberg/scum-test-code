@@ -15,6 +15,7 @@
 #include <math.h>
 #include "scum_radio_bsp.h"
 #include "lighthouse.h"
+#include "spi.h"
 
 extern unsigned int current_lfsr;
 
@@ -177,7 +178,7 @@ int main(void) {
 	// This function handles all the analog scan chain setup
 	//Do not call any other scm3C or scm3 hardware interface functions, they will mess up the analog scanchain functions
 	//This should be independent of all the random global variable settings 
-	initialize_mote_lighthouse();
+	initialize_mote();
 		
 	// Check CRC to ensure there were no errors during optical programming
 	printf("\n-------------------\n");
@@ -241,6 +242,9 @@ int main(void) {
 	target_num_data_points = 120;
 	
 	//test_LC_sweep_tx();
+	while(1){
+		spi_write( 0xAA );
+	}
 	// The optical_data_raw signal is not synchronized to HCLK domain so could possibly see glitching problems	
 	last_gpio = current_gpio;	
 	current_gpio = (0x8 & GPIO_REG__INPUT) >> 3;	
