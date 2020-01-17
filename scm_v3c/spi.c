@@ -8,8 +8,8 @@ void spi_write(unsigned char writeByte) {
 	for (j=7;j>=0;j--) {
 		if ((writeByte&(0x01<<j)) != 0) {
 			GPIO_REG__OUTPUT &= 0xFFFFBFFF; // clock low
-			GPIO_REG__OUTPUT |= 0x00001000; // write a 1
-			GPIO_REG__OUTPUT |= 0x00004000; // clock high
+			GPIO_REG__OUTPUT |= 1 << 12; // write a 1
+			GPIO_REG__OUTPUT |= 1 << 14; // clock high
 		}
 		else {
 			GPIO_REG__OUTPUT &= 0xFFFFBFFF; // clock low
