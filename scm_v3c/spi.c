@@ -5,16 +5,18 @@
 void spi_write(unsigned char writeByte) {
 	int j;
 	int t=0;
+	int clk_pin = 14;
+	int data_pin = 12;
 	for (j=7;j>=0;j--) {
 		if ((writeByte&(0x01<<j)) != 0) {
-			GPIO_REG__OUTPUT &= 0xFFFFBFFF; // clock low
-			GPIO_REG__OUTPUT |= 1 << 12; // write a 1
-			GPIO_REG__OUTPUT |= 1 << 15; // clock high
+			GPIO_REG__OUTPUT &= ~(1 << clk_pin); // clock low
+			GPIO_REG__OUTPUT |= 1 << data_pin; // write a 1
+			GPIO_REG__OUTPUT |= 1 << clk_pin; // clock high
 		}
 		else {
-			GPIO_REG__OUTPUT &= 0xFFFFBFFF; // clock low
-			GPIO_REG__OUTPUT &= 0xFFFFEFFF; // write a 0
-			GPIO_REG__OUTPUT |= 0x00004000; // clock high
+			GPIO_REG__OUTPUT &= ~(1 << clk_pin); // clock low
+			GPIO_REG__OUTPUT &= ~(1 << data_pin); // write a 0
+			GPIO_REG__OUTPUT |= (1 << clk_pin); // clock high
 		}
 	}
 	
