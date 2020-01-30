@@ -243,7 +243,7 @@ int main(void) {
 	
 	//test_LC_sweep_tx();
 	while(1){
-		read_imu_register( 0x1A );
+		test_imu_life();
 	}
 	// The optical_data_raw signal is not synchronized to HCLK domain so could possibly see glitching problems	
 	last_gpio = current_gpio;	
