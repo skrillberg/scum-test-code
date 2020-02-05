@@ -63,7 +63,7 @@ void initialize_mote_lighthouse(){
 	GPO_control(0,6,0,0);		
 	
 	//set optical pin input
-	//GPI_enables(0x0008);
+	GPI_enables(0x2008);
 	
 	//enable optical pin and external interrupt pins
 	GPI_enables(0xFF08);
