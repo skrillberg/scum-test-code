@@ -23,6 +23,7 @@ void spi_write(unsigned char writeByte) {
 	
 	GPIO_REG__OUTPUT &= ~(1 << data_pin); // set data out to 0
 }
+/*
 unsigned char spi_read() {
 	unsigned char readByte;
 	int j;
@@ -41,6 +42,21 @@ unsigned char spi_read() {
 	}
 	
 	return readByte;
+}*/
+uint8_t spi_read() {
+    uint8_t readByte;
+    int j;
+    int t = 0;
+    readByte = 0;
+    GPIO_REG__OUTPUT &= 0xFFFFBFFF; // clock low
+
+    for (j = 7; j >= 0; --j) {
+        GPIO_REG__OUTPUT |= 0x00004000; // clock high
+        readByte |= ((GPIO_REG__INPUT & 0x00002000) >> 13) << j;      
+        GPIO_REG__OUTPUT &= 0xFFFFBFFF; // clock low
+    }
+
+    return readByte;
 }
 
 void spi_chip_select() {
