@@ -245,6 +245,7 @@ int main(void) {
 	
 	//test_LC_sweep_tx();
 	while(1){
+		for( i = 0; i < 100000; i++);
 		test_imu_life();
 	}
 	// The optical_data_raw signal is not synchronized to HCLK domain so could possibly see glitching problems	
