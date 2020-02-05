@@ -13,8 +13,8 @@
 #include "Memory_map.h"
 #include <stdbool.h>
 
-#define QX3_FINE 26
-#define QX3_MID 26
+#define QX3_FINE 11
+#define QX3_MID 20
 #define HCLOCK_ERROR 924/1000
 extern char send_packet[127];
 
