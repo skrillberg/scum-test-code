@@ -98,15 +98,16 @@ unsigned int read_acc_z() {
 
 void test_imu_life() {
 	imu_data_t imu_measurement;
+	int i = 0;
 	unsigned char read_byte;
 	unsigned char write_byte = 0x00;
 	
 		imu_measurement.acc_x.value = 11;
-		send_imu_packet(imu_measurement);
+		//send_imu_packet(imu_measurement);
 	read_byte = read_imu_register(write_byte);	
 	imu_measurement.acc_x.value = read_byte;
 	send_imu_packet(imu_measurement);
-	
+	for( i = 0; i < 1000; i++);
 	if (read_byte == 0xEA) {
 		printf("My IMU is alive!!!\n");
 
