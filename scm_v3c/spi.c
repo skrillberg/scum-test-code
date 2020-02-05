@@ -104,6 +104,9 @@ void test_imu_life() {
 		imu_measurement.acc_x.value = 11;
 		send_imu_packet(imu_measurement);
 	read_byte = read_imu_register(write_byte);	
+	imu_measurement.acc_x.value = read_byte;
+	send_imu_packet(imu_measurement);
+	
 	if (read_byte == 0xEA) {
 		printf("My IMU is alive!!!\n");
 
