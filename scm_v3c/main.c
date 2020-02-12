@@ -250,7 +250,7 @@ int main(void) {
 		current_gpio = GPIO_REG__INPUT;
 		imu_measurement.acc_x.value = current_gpio;
 		send_imu_packet(imu_measurement);
-		//test_imu_life();
+		test_imu_life();
 	}
 	// The optical_data_raw signal is not synchronized to HCLK domain so could possibly see glitching problems	
 	last_gpio = current_gpio;	
