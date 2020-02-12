@@ -158,7 +158,10 @@ void test_LC_sweep_tx(void) {
 						
 					// Send bits out the radio thrice for redundancy
 					for(i=0; i<iterations; i++) {
-						send_imu_packet(imu_measurement);
+					for (i=0; i<5000; i++) {}
+					//send packet
+					radio_txNow();
+						//send_imu_packet(imu_measurement);
 					}
 				}
 			}
