@@ -234,7 +234,7 @@ int main(void) {
 
 	//run frequency cal sweep
 
-	test_LC_sweep_tx();
+	//test_LC_sweep_tx();
 
 	
 	
@@ -250,7 +250,6 @@ int main(void) {
 	// Number of data points to gather before printing		
 	target_num_data_points = 120;
 	
-	//test_LC_sweep_tx();
 	while(1){
 		imu_data_t imu_measurement;  
 		for( i = 0; i < 100000; i++);
