@@ -250,6 +250,7 @@ int main(void) {
 	// Number of data points to gather before printing		
 	target_num_data_points = 120;
 	
+	/*
 	while(1){
 		imu_data_t imu_measurement;  
 		for( i = 0; i < 100000; i++);
@@ -257,12 +258,13 @@ int main(void) {
 		//imu_measurement.acc_x.value = current_gpio;
 		//send_imu_packet(imu_measurement);
 		test_imu_life();
-	}
+	}*/
+	
 	// The optical_data_raw signal is not synchronized to HCLK domain so could possibly see glitching problems	
 	last_gpio = current_gpio;	
 	current_gpio = (0x8 & GPIO_REG__INPUT) >> 3;	
 
-
+	test_imu_life();
 	//start localization loop
 	while(1) {
 		//poll imu 
@@ -274,9 +276,9 @@ int main(void) {
 		//test_imu_life();
 		//GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
 		
-		imu_measurement.acc_x.value = 200;
-		imu_measurement.acc_y.value = -200;
-		imu_measurement.acc_z.value = 1000;
+		imu_measurement.acc_x.value = read_acc_x();
+		imu_measurement.acc_y.value = read_acc_y();
+		imu_measurement.acc_z.value = read_acc_z();
 		imu_measurement.gyro_x.value = -1000; 
 		imu_measurement.gyro_y.value = -1234; 
 		imu_measurement.gyro_z.value = 1111;
