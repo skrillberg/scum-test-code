@@ -285,9 +285,9 @@ int main(void) {
 		imu_measurement.acc_x.value = read_acc_x();
 		imu_measurement.acc_y.value = read_acc_y();
 		imu_measurement.acc_z.value = read_acc_z();
-		imu_measurement.gyro_x.value = -1000; 
-		imu_measurement.gyro_y.value = -1234; 
-		imu_measurement.gyro_z.value = 1111;
+		imu_measurement.gyro_x.value = read_gyro_x(); 
+		imu_measurement.gyro_y.value = read_gyro_y(); 
+		imu_measurement.gyro_z.value = read_gyro_z();
 		
 		//send measurement
 		for( i = 0; i < 500000; i++){

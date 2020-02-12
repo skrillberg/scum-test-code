@@ -112,6 +112,43 @@ unsigned int read_acc_z() {
 	return acc_z;
 }
 
+
+unsigned int read_gyro_x() {
+	unsigned int gyro_x;
+	unsigned char read_byte;
+	unsigned char write_byte = 0x33;
+	
+	gyro_x = (read_imu_register(write_byte))<<8;
+	write_byte = 0x34;
+	gyro_x |= read_imu_register(write_byte);
+	
+	return gyro_x;
+}
+
+unsigned int read_gyro_y() {
+	unsigned int gyro_y;
+	unsigned char read_byte;
+	unsigned char write_byte = 0x35;
+	
+	gyro_y = (read_imu_register(write_byte))<<8;
+	write_byte = 0x36;
+	gyro_y |= read_imu_register(write_byte);
+	
+	return gyro_y;
+}
+
+unsigned int read_gyro_z() {
+	unsigned int gyro_z;
+	unsigned char read_byte;
+	unsigned char write_byte = 0x37;
+	
+	gyro_z = (read_imu_register(write_byte))<<8;
+	write_byte = 0x38;
+	gyro_z |= read_imu_register(write_byte);
+	
+	return gyro_z;
+}
+
 void test_imu_life() {
 	imu_data_t imu_measurement;
 	int i = 0;

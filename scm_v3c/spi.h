@@ -1,3 +1,7 @@
+unsigned int read_gyro_x();
+unsigned int read_gyro_y();
+unsigned int read_gyro_z();
+
 void spi_write(unsigned char writeByte);
 
 unsigned char spi_read();
