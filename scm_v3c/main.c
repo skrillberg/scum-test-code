@@ -158,7 +158,7 @@ void test_LC_sweep_tx(void) {
 						
 					// Send bits out the radio thrice for redundancy
 					for(i=0; i<iterations; i++) {
-						//send_imu_packet(imu_measurement);
+						send_imu_packet(imu_measurement);
 					}
 				}
 			}
@@ -231,7 +231,7 @@ int main(void) {
 
 	//run frequency cal sweep
 
-	//test_LC_sweep_tx();
+	test_LC_sweep_tx();
 
 	
 	
