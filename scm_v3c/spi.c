@@ -120,7 +120,7 @@ void test_imu_life() {
 	
 		imu_measurement.acc_x.value = 66;
 		//send_imu_packet(imu_measurement);
-	//read_byte = read_imu_register(write_byte);	
+	read_byte = read_imu_register(write_byte);	
 	//imu_measurement.acc_x.value = read_byte;
 	//send_imu_packet(imu_measurement);
 	
