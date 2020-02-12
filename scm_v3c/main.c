@@ -152,9 +152,13 @@ void test_LC_sweep_tx(void) {
 					//gpo toggle on all gpos
 					for (i=0; i<5000; i++) {}
 
+	
+					//send packet
+					radio_txNow();
+						
 					// Send bits out the radio thrice for redundancy
 					for(i=0; i<iterations; i++) {
-						send_imu_packet(imu_measurement);
+						//send_imu_packet(imu_measurement);
 					}
 				}
 			}
