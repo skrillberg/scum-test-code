@@ -958,10 +958,10 @@ void send_imu_packet(imu_data_t imu_measurement){
 	timestamp = RFTIMER_REG__COUNTER;	
 	
 	//place bottom half of timestamp in 
-	send_packet[13] = (timestamp & 0xF000) >> 24;
-	send_packet[14] = (timestamp & 0xF00) >> 16;
-	send_packet[15] = (timestamp & 0xF0) >> 8;
-	send_packet[16] = (timestamp & 0xF);
+	send_packet[13] = (timestamp & 0xFF);
+	send_packet[14] = (timestamp & 0xFF00) >> 8;
+	send_packet[15] = (timestamp & 0xFF0000) >> 16;
+	send_packet[16] = (timestamp & 0xFF000000) >> 24;
 	
 	//load packet
 	radio_loadPacket(17);
