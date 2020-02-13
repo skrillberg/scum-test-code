@@ -42,22 +42,7 @@ unsigned char spi_read() {
 	}
 	
 	return readByte;
-}/*
-uint8_t spi_read() {
-    uint8_t readByte;
-    int j;
-    int t = 0;
-    readByte = 0;
-    GPIO_REG__OUTPUT &= 0xFFFFBFFF; // clock low
-
-    for (j = 7; j >= 0; --j) {
-        GPIO_REG__OUTPUT |= 0x00004000; // clock high
-        readByte |= ((GPIO_REG__INPUT & 0x00002000) >> 13) << j;      
-        GPIO_REG__OUTPUT &= 0xFFFFBFFF; // clock low
-    }
-
-    return readByte;
-}*/
+}
 
 void spi_chip_select() {
 	int t = 0;
@@ -155,12 +140,9 @@ void test_imu_life() {
 	unsigned char read_byte;
 	unsigned char write_byte = 0x00;
 	
-		imu_measurement.acc_x.value = 66;
-		//send_imu_packet(imu_measurement);
+	imu_measurement.acc_x.value = 66;
 	read_byte = read_imu_register(write_byte);	
-	//imu_measurement.acc_x.value = read_byte;
-	//send_imu_packet(imu_measurement);
-	
+
 	if (read_byte == 0xEA) {
 		printf("My IMU is alive!!!\n");
 
