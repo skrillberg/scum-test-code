@@ -958,12 +958,13 @@ void send_imu_packet(imu_data_t imu_measurement){
 	timestamp = RFTIMER_REG__COUNTER;	
 	
 	//place bottom half of timestamp in 
-	send_packet[13] = (timestamp & 0xF0) >> 8;
-	send_packet[14] = (timestamp & 0xF);
-	
+	send_packet[13] = (timestamp & 0xF000) >> 24;
+	send_packet[14] = (timestamp & 0xF00) >> 16;
+	send_packet[15] = (timestamp & 0xF0) >> 8;
+	send_packet[16] = (timestamp & 0xF);
 	
 	//load packet
-	radio_loadPacket(15);
+	radio_loadPacket(17);
 	
 	//set lo frequency
 	//original: LC_FREQCHANGE(23&0x1F, 2&0x1F, 6&0x1F); //for pa
