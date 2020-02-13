@@ -924,6 +924,7 @@ void lh_int_cb(int level){
 //This function sends an IMU packet, which is different than a lighthouse packet by length and the first byte will be 'i' (105)
 void send_imu_packet(imu_data_t imu_measurement){
 	int i;
+	uint32_t timestamp;
 	//enable radio
 	radio_txEnable();
 	
@@ -954,9 +955,15 @@ void send_imu_packet(imu_data_t imu_measurement){
 	send_packet[11] = imu_measurement.gyro_z.bytes[0];
 	send_packet[12] = imu_measurement.gyro_z.bytes[1];
 	
+	timestamp = RFTIMER_REG__COUNTER;	
+	
+	//place bottom half of timestamp in 
+	send_packet[13] = (timestamp & 0xF0) >> 8;
+	send_packet[14] = (timestamp & 0xF);
+	
 	
 	//load packet
-	radio_loadPacket(13);
+	radio_loadPacket(15);
 	
 	//set lo frequency
 	//original: LC_FREQCHANGE(23&0x1F, 2&0x1F, 6&0x1F); //for pa
