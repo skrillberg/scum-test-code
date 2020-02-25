@@ -60,7 +60,7 @@ void initialize_mote_lighthouse(){
 	GPI_control(0,0,1,0);
 	
 	// Select banks for GPIO outputs
-	//GPO_control(0,6,6,6);		
+	GPO_control(0,6,6,6);		
 	
 	//set optical pin input
 	//GPI_enables(0x2008);
