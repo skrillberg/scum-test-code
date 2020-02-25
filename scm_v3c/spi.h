@@ -19,3 +19,5 @@ void test_imu_life();
 unsigned char read_imu_register(unsigned char reg);
 
 void write_imu_register(unsigned char reg, unsigned char data);
+
+void ICM_ReadMag(int16_t magn[3]);

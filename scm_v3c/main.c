@@ -234,7 +234,7 @@ int main(void) {
 
 	//run frequency cal sweep
 
-	//test_LC_sweep_tx();
+	test_LC_sweep_tx();
 
 	
 	
