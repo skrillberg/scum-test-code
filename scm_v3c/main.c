@@ -100,7 +100,7 @@ void test_LC_sweep_tx(void) {
 		
 
 
-		for (coarse=20; coarse<27; coarse++) {
+		for (coarse=22; coarse<25; coarse++) {
 			for (mid=0; mid<32; mid++) {
 				for (fine=0; fine<32; fine++) {
 					
