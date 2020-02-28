@@ -273,6 +273,7 @@ int main(void) {
 	*/
 	LC_FREQCHANGE(23&0x1F, 25&0x1F, 25&0x1F);
 	//start localization loop
+	radio_txEnable();
 	while(1) {
 		//poll imu 
 
