@@ -293,7 +293,9 @@ int main(void) {
 		//send measurement
 		for( i = 0; i < 20000; i++){
 		}
-		send_imu_packet(imu_measurement);
+		radio_loadPacket(13);
+		radio_txNow();
+		//send_imu_packet(imu_measurement);
 		
 		//use interrupts intesad of polling
 		/*
