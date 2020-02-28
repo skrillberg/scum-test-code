@@ -270,7 +270,7 @@ int main(void) {
 	for(i=0; i<50000; i++);
 	write_imu_register(0x06,0x01);
 	for(i=0; i<50000; i++);
-	
+	LC_FREQCHANGE(23&0x1F, 25&0x1F, 25&0x1F);
 	//start localization loop
 	while(1) {
 		//poll imu 

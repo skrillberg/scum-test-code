@@ -955,7 +955,7 @@ void send_imu_packet(imu_data_t imu_measurement){
 	send_packet[11] = imu_measurement.gyro_z.bytes[0];
 	send_packet[12] = imu_measurement.gyro_z.bytes[1];
 	
-	//timestamp = RFTIMER_REG__COUNTER;	
+	timestamp = RFTIMER_REG__COUNTER;	
 	
 	//place bottom half of timestamp in 
 	send_packet[13] = (timestamp & 0xFF);
@@ -969,7 +969,7 @@ void send_imu_packet(imu_data_t imu_measurement){
 	//set lo frequency
 	//original: LC_FREQCHANGE(23&0x1F, 2&0x1F, 6&0x1F); //for pa
 	//LC_FREQCHANGE(23&0x1F, 21&0x1F, 8&0x1F);
-	LC_FREQCHANGE(23&0x1F, QX3_MID&0x1F, QX3_FINE&0x1F);
+	//LC_FREQCHANGE(23&0x1F, QX3_MID&0x1F, QX3_FINE&0x1F);
 	//wait for 1000 loop cycles
 	
 	for(i = 0; i<1000; i++){
