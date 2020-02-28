@@ -290,7 +290,7 @@ int main(void) {
 		imu_measurement.gyro_z.value = read_gyro_z();
 		
 		//send measurement
-		for( i = 0; i < 40000; i++){
+		for( i = 0; i < 20000; i++){
 		}
 		send_imu_packet(imu_measurement);
 		
