@@ -964,7 +964,7 @@ void send_imu_packet(imu_data_t imu_measurement){
 	send_packet[16] = (timestamp & 0xFF000000) >> 24;
 	
 	//load packet
-	radio_loadPacket(17);
+	radio_loadPacket(13);
 	
 	//set lo frequency
 	//original: LC_FREQCHANGE(23&0x1F, 2&0x1F, 6&0x1F); //for pa
