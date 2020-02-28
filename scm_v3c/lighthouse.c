@@ -57,16 +57,16 @@ void initialize_mote_lighthouse(){
 	//GPI_control(0,0,0,0);
 	
 	//set gpi interrupts
-	GPI_control(0,0,1,0);
+	//GPI_control(0,0,1,0);
 	
 	// Select banks for GPIO outputs
-	GPO_control(0,6,6,6);		
+	//GPO_control(0,6,6,6);		
 	
 	//set optical pin input
 	//GPI_enables(0x2008);
 	
 	//enable optical pin and external interrupt pins
-	GPI_enables(0xFF08);
+	//GPI_enables(0xFF08);
 	
 	
 	
@@ -75,7 +75,7 @@ void initialize_mote_lighthouse(){
 	//GPO_enables(0xFFFF);
 	
 	//Set GPIOs except interrupts as outputs
-	GPO_enables(0xD0FF);
+	//GPO_enables(0xD0FF);
 
 	// Set HCLK source as HF_CLOCK
 	set_asc_bit(1147);
