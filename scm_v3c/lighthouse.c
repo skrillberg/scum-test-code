@@ -879,7 +879,7 @@ void lh_int_cb(int level){
 			ICPR = GPIO9_LOW_INT;
 			//
 			#if DEBUG_INT == 1
-				send_lh_packet(2,2, A, AZIMUTH);
+				//send_lh_packet(2,2, A, AZIMUTH);
 			#endif
 		}
 	}
@@ -912,10 +912,10 @@ void lh_int_cb(int level){
 			ICPR = GPIO8_HIGH_INT;
 			
 			#if DEBUG_INT == 1
-				send_lh_packet(1,1, A, AZIMUTH);
+				//send_lh_packet(1,1, A, AZIMUTH);
 			#endif
 			
-			update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
+			//update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
 			//send_lh_packet(timestamp_rise,timestamp_fall,A,AZIMUTH);
 		}
 	}
