@@ -419,7 +419,6 @@ pulse_type_t classify_pulse(unsigned int timestamp_rise, unsigned int timestamp_
 	pulse_width = (timestamp_fall - timestamp_rise)*HCLOCK_ERROR;
 	// Identify what kind of pulse this was
 	pulse_type = INVALID;
-	return pulse_type;
 	
 	if(pulse_width < 585  && pulse_width > 100 ){
 		pulse_type = 4; // Laser sweep (THIS NEEDS TUNING)
@@ -947,14 +946,14 @@ void lh_int_cb(int level){
 			//pulse_width = (uint32_t)((timestamp_fall - timestamp_rise)*HCLOCK_ERROR);
 			// Identify what kind of pulse this was
 			//pulse_type = 5;
-			/*
+			
 			if(pulse_width < 585  && pulse_width > 100 ){
 				pulse_type = 4; // Laser sweep (THIS NEEDS TUNING)
 			}
-		*/
+		
 				
 			//for(i = 0; i < 100; i++);
-			//classify_pulse(timestamp_rise, timestamp_fall);
+			classify_pulse(timestamp_rise, timestamp_fall);
 			//update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
 			send_lh_packet(1,1, A, AZIMUTH);
 			
