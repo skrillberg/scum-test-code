@@ -876,7 +876,7 @@ void lh_int_cb(int level){
 	//send_lh_packet(1,1, A, AZIMUTH);
 	//detect edge transitions and disable level interrupts to mimic edge behavior
 	
-	 pulse_type_t pulse_type;
+	 uint8_t pulse_type;
 	int i =0;
 	uint32_t pulse_width;	
 	
@@ -944,10 +944,10 @@ void lh_int_cb(int level){
 			#endif
 			
 
-			/*
+			
 			pulse_width = (timestamp_fall - timestamp_rise)*HCLOCK_ERROR;
 			// Identify what kind of pulse this was
-			pulse_type = INVALID;
+			pulse_type = 5;
 			
 			if(pulse_width < 585 + WIDTH_BIAS && pulse_width > 100 + WIDTH_BIAS){
 				pulse_type = 4; // Laser sweep (THIS NEEDS TUNING)
@@ -978,8 +978,8 @@ void lh_int_cb(int level){
 			}else{
 				pulse_type = 5;
 			}
-				*/
-			for(i = 0; i < 100; i++);
+				
+			//for(i = 0; i < 100; i++);
 			classify_pulse(timestamp_rise, timestamp_fall);
 			//update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
 
