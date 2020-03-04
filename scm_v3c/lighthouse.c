@@ -419,7 +419,7 @@ pulse_type_t classify_pulse(unsigned int timestamp_rise, unsigned int timestamp_
 	pulse_width = (timestamp_fall - timestamp_rise)*HCLOCK_ERROR;
 	// Identify what kind of pulse this was
 	pulse_type = INVALID;
-	
+	return pulse_type;
 	if(pulse_width < 585  && pulse_width > 100 ){
 		pulse_type = 4; // Laser sweep (THIS NEEDS TUNING)
 	}
