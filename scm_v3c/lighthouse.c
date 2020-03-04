@@ -983,7 +983,7 @@ void lh_int_cb(int level){
 		
 				//for(i = 0; i < 100; i++);
 			//classify_pulse(timestamp_rise, timestamp_fall);
-			update_state(idx,timestamp_rise);
+			//update_state(idx,timestamp_rise);
 			//send_lh_packet(1,1, A, AZIMUTH);
 			
 
