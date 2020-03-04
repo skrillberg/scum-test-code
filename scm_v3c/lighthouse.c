@@ -515,7 +515,7 @@ void update_state(pulse_type_t pulse_type, unsigned int timestamp_rise){
 			// An output will only be printed if four pulses are found and the sync pulse widths
 			// are within the bounds listed above.
 		update_state_azimuth(pulse_type,timestamp_rise);
-		update_state_elevation(pulse_type,timestamp_rise);
+		//update_state_elevation(pulse_type,timestamp_rise);
 
 }
 
@@ -852,7 +852,7 @@ void lh_int_cb(int level){
 	static uint8_t debounce_count_low=0;
 	static uint32_t timestamp_rise = 0;
 	static uint32_t timestamp_fall = 0;
-	send_lh_packet(1,1, A, AZIMUTH);
+	//send_lh_packet(1,1, A, AZIMUTH);
 	//detect edge transitions and disable level interrupts to mimic edge behavior
 	
 	//check for rising edge
@@ -918,7 +918,7 @@ void lh_int_cb(int level){
 				send_lh_packet(1,1, A, AZIMUTH);
 			#endif
 			
-			//update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
+			update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
 		}
 	}
 }
