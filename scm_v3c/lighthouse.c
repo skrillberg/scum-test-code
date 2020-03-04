@@ -875,7 +875,8 @@ void lh_int_cb(int level){
 	//send_lh_packet(1,1, A, AZIMUTH);
 	//detect edge transitions and disable level interrupts to mimic edge behavior
 	 uint8_t pulse_type;
-	int i =0;
+	int idx =0;
+	int val = 0;
 	uint32_t pulse_width;	
 	
 	//check for rising edge
@@ -946,37 +947,39 @@ void lh_int_cb(int level){
 				//pulse_width = (uint32_t)((timestamp_fall - timestamp_rise)*HCLOCK_ERROR);
 			// Identify what kind of pulse this was
 			//pulse_type = 5;
-				pulse_width = 1330;
-				if(pulse_width < 585  && pulse_width > 100 ){
-					pulse_type = 4; // Laser sweep (THIS NEEDS TUNING)
-				}
-				else if(pulse_width < 675  && pulse_width > 585 ){
-					pulse_type = 0; // Azimuth sync, data=0, skip = 0
-				}
-				else if(pulse_width >= 675  && pulse_width < 781 ){
-					pulse_type = 2; // Elevation sync, data=0, skip = 0
-				}
-				else if(pulse_width >= 781  && pulse_width < 885 ){
-					pulse_type = 0; // Azimuth sync, data=1, skip = 0
-				}
-				else if(pulse_width >= 885  && pulse_width < 989 ){
-					pulse_type = 2; // Elevation sync, data=1, skip = 0
-				}
-				else if(pulse_width >= 989  && pulse_width < 1083 ){
-					pulse_type = 1; //Azimuth sync, data=0, skip = 1
-				}
-				else if(pulse_width >= 1083  && pulse_width < 1200 ){
-					pulse_type = 3; //elevation sync, data=0, skip = 1
-				}
-				else if(pulse_width >= 1200  && pulse_width < 1300 ){
-					pulse_type = 1; //Azimuth sync, data=1, skip = 1
-				}
-				else if(pulse_width >= 1300  && pulse_width < 1400 ){
-					pulse_type = 3; //Elevation sync, data=1, skip = 1
-				}else{
-					pulse_type = 5;
-				}
-
+		pulse_width = 1330;
+	
+    
+    val = pulse_width < 585  && pulse_width > 100 ;
+		idx += 4 *val;		
+		
+		val = pulse_width < 675  && pulse_width > 585;
+		idx += 0*val;
+		
+		val = pulse_width >= 675  && pulse_width < 781;
+		idx += val*2;
+				
+		val = pulse_width >= 781  && pulse_width < 885; 
+		idx += val*0;
+		
+		val = pulse_width >= 885  && pulse_width < 989;
+		idx += val*2;
+		
+		val = pulse_width >= 989  && pulse_width < 1083; 
+		idx += val*1;
+		
+		val = pulse_width >= 1083  && pulse_width < 1200; 
+		idx += val*3;
+		
+		val = pulse_width >= 1200  && pulse_width < 1300 ;
+		idx += val*1;
+		
+		val = pulse_width >= 1300  && pulse_width < 1400;
+		idx += val*3;
+		
+		val = pulse_width >= 1400 || pulse_width < 100 ;
+		idx += val*5;
+		
 		
 				//for(i = 0; i < 100; i++);
 			classify_pulse(timestamp_rise, timestamp_fall);
