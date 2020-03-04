@@ -375,8 +375,7 @@ void send_lh_packet(unsigned int sync_time, unsigned int laser_time, lh_id_t lig
 					if(USE_RADIO == 0){
 						return;
 					}
-					return;
-
+					radio_rfOff();
 						//turn on radio (radio_txenable)
 					radio_txEnable();
 					//enable radio interrupts (radio_enable_interrupts) (do this somewhere; only needs to be done once)
