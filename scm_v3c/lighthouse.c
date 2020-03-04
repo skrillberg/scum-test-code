@@ -417,7 +417,6 @@ pulse_type_t classify_pulse(unsigned int timestamp_rise, unsigned int timestamp_
 	uint32_t pulse_width;
 	
 	pulse_width = (timestamp_fall - timestamp_rise)*HCLOCK_ERROR;
-	pulse_type = INVALID;
 	// Identify what kind of pulse this was
 
 	if(pulse_width < 585 + WIDTH_BIAS && pulse_width > 100 + WIDTH_BIAS){
