@@ -946,7 +946,7 @@ void lh_int_cb(int level){
 				//pulse_width = (uint32_t)((timestamp_fall - timestamp_rise)*HCLOCK_ERROR);
 			// Identify what kind of pulse this was
 			//pulse_type = 5;
-			
+				pulse_width = 1330;
 				if(pulse_width < 585  && pulse_width > 100 ){
 					pulse_type = 4; // Laser sweep (THIS NEEDS TUNING)
 				}
