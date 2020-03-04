@@ -413,12 +413,14 @@ void send_lh_packet(unsigned int sync_time, unsigned int laser_time, lh_id_t lig
 pulse_type_t classify_pulse(unsigned int timestamp_rise, unsigned int timestamp_fall){
 	
   pulse_type_t pulse_type;
-	
+	int i =0;
 	uint32_t pulse_width;
 	
 	pulse_width = (timestamp_fall - timestamp_rise)*HCLOCK_ERROR;
 	// Identify what kind of pulse this was
-
+	for(i = 0; i < 1000; i++);
+	pulse_type = INVALID;
+	return pulse_type;
 	if(pulse_width < 585 + WIDTH_BIAS && pulse_width > 100 + WIDTH_BIAS){
 		pulse_type = 4; // Laser sweep (THIS NEEDS TUNING)
 	}
