@@ -446,6 +446,8 @@ pulse_type_t classify_pulse(unsigned int timestamp_rise, unsigned int timestamp_
 	}
 	else if(pulse_width >= 1300 + WIDTH_BIAS && pulse_width < 1400 + WIDTH_BIAS){
 		pulse_type = EL_SKIP; //Elevation sync, data=1, skip = 1
+	}else{
+		pulse_type = INVALID;
 	}
 
 	
