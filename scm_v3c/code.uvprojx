@@ -7,10 +7,10 @@
 
   <Targets>
     <Target>
-      <TargetName>freq_sweep_tx</TargetName>
+      <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <pCCUsed>5060183::V5.06 update 2 (build 183)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>ARMCM0</Device>
@@ -47,14 +47,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>freq_sweep_tx</OutputName>
+          <OutputDirectory>.\</OutputDirectory>
+          <OutputName>code</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>1</CreateHexFile>
-          <DebugInformation>1</DebugInformation>
+          <CreateHexFile>0</CreateHexFile>
+          <DebugInformation>0</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\Listings\</ListingPath>
+          <ListingPath>.\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -81,8 +81,8 @@
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>1</RunUserProg2>
-            <UserProg1Name>fromelf --bin .\Objects\freq_sweep_tx.axf -o .\Objects\freq_sweep_tx.bin</UserProg1Name>
-            <UserProg2Name>fromelf -cvf .\Objects\freq_sweep_tx.axf -o .\Objects\disasm.txt</UserProg2Name>
+            <UserProg1Name>fromelf --bin code.axf -o code.bin</UserProg1Name>
+            <UserProg2Name>fromelf -cvf code.axf -o disasm.txt</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopA1X>0</nStopA1X>
@@ -334,7 +334,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>../../</IncludePath>
+              <IncludePath></IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -364,7 +364,7 @@
             <TextAddressRange>0x00000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile>freq_sweep_tx.sct</ScatterFile>
+            <ScatterFile>code.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -375,107 +375,77 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>app</GroupName>
-          <Files>
-            <File>
-              <FileName>freq_sweep_tx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\freq_sweep_tx.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>drv</GroupName>
+          <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
               <FileName>cm0dsasm.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\..\cm0dsasm.s</FilePath>
+              <FilePath>cm0dsasm.s</FilePath>
+            </File>
+            <File>
+              <FileName>Int_Handlers.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>Int_Handlers.h</FilePath>
             </File>
             <File>
               <FileName>Memory_Map.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\Memory_Map.h</FilePath>
+              <FilePath>Memory_Map.h</FilePath>
             </File>
             <File>
               <FileName>retarget.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\retarget.c</FilePath>
+              <FilePath>retarget.c</FilePath>
             </File>
             <File>
-              <FileName>optical.c</FileName>
+              <FileName>rf_global_vars.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>rf_global_vars.h</FilePath>
+            </File>
+            <File>
+              <FileName>scm3C_hardware_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\scm3C_hardware_interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>scm3C_hardware_interface.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\optical.c</FilePath>
+              <FilePath>.\scm3C_hardware_interface.c</FilePath>
             </File>
             <File>
-              <FileName>optical.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\optical.h</FilePath>
-            </File>
-            <File>
-              <FileName>radio.c</FileName>
+              <FileName>scm3_hardware_interface.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\radio.c</FilePath>
+              <FilePath>.\scm3_hardware_interface.c</FilePath>
             </File>
             <File>
-              <FileName>radio.h</FileName>
+              <FileName>scm3_hardware_interface.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\radio.h</FilePath>
+              <FilePath>.\scm3_hardware_interface.h</FilePath>
             </File>
             <File>
-              <FileName>adc.c</FileName>
+              <FileName>scum_radio_bsp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\adc.c</FilePath>
+              <FilePath>.\scum_radio_bsp.c</FilePath>
             </File>
             <File>
-              <FileName>adc.h</FileName>
+              <FileName>scum_radio_bsp.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\adc.h</FilePath>
+              <FilePath>.\scum_radio_bsp.h</FilePath>
             </File>
             <File>
-              <FileName>gpio.c</FileName>
+              <FileName>lighthouse.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\gpio.c</FilePath>
+              <FilePath>.\lighthouse.c</FilePath>
             </File>
             <File>
-              <FileName>gpio.h</FileName>
+              <FileName>lighthouse.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\gpio.h</FilePath>
+              <FilePath>.\lighthouse.h</FilePath>
             </File>
             <File>
-              <FileName>uart.c</FileName>
+              <FileName>lighthouse_fusion_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\uart.h</FilePath>
-            </File>
-            <File>
-              <FileName>rftimer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\rftimer.c</FilePath>
-            </File>
-            <File>
-              <FileName>rftimer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\rftimer.h</FilePath>
-            </File>
-            <File>
-              <FileName>scum_defs.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\scum_defs.h</FilePath>
-            </File>
-            <File>
-              <FileName>scm3c_hw_interface.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\scm3c_hw_interface.h</FilePath>
-            </File>
-            <File>
-              <FileName>scm3c_hw_interface.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\scm3c_hw_interface.c</FilePath>
+              <FilePath>.\applications\lighthouse_fusion\lighthouse_fusion_app.c</FilePath>
             </File>
           </Files>
         </Group>
