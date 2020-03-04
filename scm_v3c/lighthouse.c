@@ -507,14 +507,13 @@ void debounce_gpio(unsigned short gpio, unsigned short * gpio_out, unsigned int 
 void update_state(pulse_type_t pulse_type, unsigned int timestamp_rise){
 	
 	
-	
 	if(pulse_type == INVALID){
 		return;
 	}
 	// FSM which searches for the four pulse sequence
 			// An output will only be printed if four pulses are found and the sync pulse widths
 			// are within the bounds listed above.
-		update_state_azimuth(pulse_type,timestamp_rise);
+		//update_state_azimuth(pulse_type,timestamp_rise);
 		//update_state_elevation(pulse_type,timestamp_rise);
 
 }
@@ -919,7 +918,9 @@ void lh_int_cb(int level){
 			#endif
 			
 			update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
+
 		}
+		
 	}
 }
 
