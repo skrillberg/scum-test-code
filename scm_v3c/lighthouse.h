@@ -28,7 +28,6 @@ typedef struct imu_data_t{
 
 #define DEBUG_STATE 0
 #define DEB_THRESH 2
-#define WIDTH_BIAS 0
 #define USE_RADIO 1
 #define DEBUG_INT 0
 #define IMU_CODE 105 //code that tells code that its an imu packet

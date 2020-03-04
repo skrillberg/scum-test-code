@@ -421,31 +421,31 @@ pulse_type_t classify_pulse(unsigned int timestamp_rise, unsigned int timestamp_
 	pulse_type = INVALID;
 	return pulse_type;
 	
-	if(pulse_width < 585 + WIDTH_BIAS && pulse_width > 100 + WIDTH_BIAS){
+	if(pulse_width < 585  && pulse_width > 100 ){
 		pulse_type = 4; // Laser sweep (THIS NEEDS TUNING)
 	}
-	else if(pulse_width < 675 + WIDTH_BIAS && pulse_width > 585 + WIDTH_BIAS){
+	else if(pulse_width < 675  && pulse_width > 585 ){
 		pulse_type = 0; // Azimuth sync, data=0, skip = 0
 	}
-	else if(pulse_width >= 675 + WIDTH_BIAS && pulse_width < 781 + WIDTH_BIAS){
+	else if(pulse_width >= 675  && pulse_width < 781 ){
 		pulse_type = 2; // Elevation sync, data=0, skip = 0
 	}
-	else if(pulse_width >= 781 + WIDTH_BIAS && pulse_width < 885 + WIDTH_BIAS){
+	else if(pulse_width >= 781  && pulse_width < 885 ){
 		pulse_type = 0; // Azimuth sync, data=1, skip = 0
 	}
-	else if(pulse_width >= 885 + WIDTH_BIAS && pulse_width < 989 + WIDTH_BIAS){
+	else if(pulse_width >= 885  && pulse_width < 989 ){
 		pulse_type = 2; // Elevation sync, data=1, skip = 0
 	}
-	else if(pulse_width >= 989 + WIDTH_BIAS && pulse_width < 1083 + WIDTH_BIAS){
+	else if(pulse_width >= 989  && pulse_width < 1083 ){
 		pulse_type = 1; //Azimuth sync, data=0, skip = 1
 	}
-	else if(pulse_width >= 1083 + WIDTH_BIAS && pulse_width < 1200 + WIDTH_BIAS){
+	else if(pulse_width >= 1083  && pulse_width < 1200 ){
 		pulse_type = 3; //elevation sync, data=0, skip = 1
 	}
-	else if(pulse_width >= 1200 + WIDTH_BIAS && pulse_width < 1300 + WIDTH_BIAS){
+	else if(pulse_width >= 1200  && pulse_width < 1300 ){
 		pulse_type = 1; //Azimuth sync, data=1, skip = 1
 	}
-	else if(pulse_width >= 1300 + WIDTH_BIAS && pulse_width < 1400 + WIDTH_BIAS){
+	else if(pulse_width >= 1300  && pulse_width < 1400 ){
 		pulse_type = 3; //Elevation sync, data=1, skip = 1
 	}else{
 		pulse_type = 5;
@@ -945,43 +945,44 @@ void lh_int_cb(int level){
 			
 
 			
-			pulse_width = (timestamp_fall - timestamp_rise)*HCLOCK_ERROR;
+			pulse_width = (uint32_t)((timestamp_fall - timestamp_rise)*HCLOCK_ERROR);
 			// Identify what kind of pulse this was
 			pulse_type = 5;
 			
-			if(pulse_width < 585 + WIDTH_BIAS && pulse_width > 100 + WIDTH_BIAS){
+			if(pulse_width < 585  && pulse_width > 100 ){
 				pulse_type = 4; // Laser sweep (THIS NEEDS TUNING)
 			}
-			else if(pulse_width < 675 + WIDTH_BIAS && pulse_width > 585 + WIDTH_BIAS){
+			else if(pulse_width < 675  && pulse_width > 585 ){
 				pulse_type = 0; // Azimuth sync, data=0, skip = 0
 			}
-			else if(pulse_width >= 675 + WIDTH_BIAS && pulse_width < 781 + WIDTH_BIAS){
+			else if(pulse_width >= 675  && pulse_width < 781 ){
 				pulse_type = 2; // Elevation sync, data=0, skip = 0
 			}
-			else if(pulse_width >= 781 + WIDTH_BIAS && pulse_width < 885 + WIDTH_BIAS){
+			else if(pulse_width >= 781  && pulse_width < 885 ){
 				pulse_type = 0; // Azimuth sync, data=1, skip = 0
 			}
-			else if(pulse_width >= 885 + WIDTH_BIAS && pulse_width < 989 + WIDTH_BIAS){
+			else if(pulse_width >= 885  && pulse_width < 989 ){
 				pulse_type = 2; // Elevation sync, data=1, skip = 0
 			}
-			else if(pulse_width >= 989 + WIDTH_BIAS && pulse_width < 1083 + WIDTH_BIAS){
+			else if(pulse_width >= 989  && pulse_width < 1083 ){
 				pulse_type = 1; //Azimuth sync, data=0, skip = 1
 			}
-			else if(pulse_width >= 1083 + WIDTH_BIAS && pulse_width < 1200 + WIDTH_BIAS){
+			else if(pulse_width >= 1083  && pulse_width < 1200 ){
 				pulse_type = 3; //elevation sync, data=0, skip = 1
 			}
-			else if(pulse_width >= 1200 + WIDTH_BIAS && pulse_width < 1300 + WIDTH_BIAS){
+			else if(pulse_width >= 1200  && pulse_width < 1300 ){
 				pulse_type = 1; //Azimuth sync, data=1, skip = 1
 			}
-			else if(pulse_width >= 1300 + WIDTH_BIAS && pulse_width < 1400 + WIDTH_BIAS){
+			else if(pulse_width >= 1300  && pulse_width < 1400 ){
 				pulse_type = 3; //Elevation sync, data=1, skip = 1
 			}else{
 				pulse_type = 5;
 			}
 				
 			//for(i = 0; i < 100; i++);
-			classify_pulse(timestamp_rise, timestamp_fall);
+			//classify_pulse(timestamp_rise, timestamp_fall);
 			//update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
+			send_lh_packet(1,1, A, AZIMUTH);
 
 		}
 		
