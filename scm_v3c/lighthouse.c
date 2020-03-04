@@ -875,10 +875,10 @@ void lh_int_cb(int level){
 	static uint32_t timestamp_fall = 0;
 	//send_lh_packet(1,1, A, AZIMUTH);
 	//detect edge transitions and disable level interrupts to mimic edge behavior
-	
 	 uint8_t pulse_type;
 	int i =0;
 	uint32_t pulse_width;	
+	send_lh_packet(1,1, A, AZIMUTH);
 	
 	//check for rising edge
 	if(level == 1 && state == 0){
@@ -957,7 +957,7 @@ void lh_int_cb(int level){
 			//for(i = 0; i < 100; i++);
 			//classify_pulse(timestamp_rise, timestamp_fall);
 			//update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
-			send_lh_packet(1,1, A, AZIMUTH);
+			
 
 		}
 		
