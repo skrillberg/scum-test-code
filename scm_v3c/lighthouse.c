@@ -917,6 +917,11 @@ void lh_int_cb(int level){
 			
 			update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
 			//send_lh_packet(timestamp_rise,timestamp_fall,A,AZIMUTH);
+			//enable active high interrupt
+			ISER = GPIO8_HIGH_INT;
+			
+			//clear interrupt
+			ICPR = GPIO8_HIGH_INT;
 		}
 	}
 }
