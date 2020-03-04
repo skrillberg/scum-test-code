@@ -292,8 +292,8 @@ int main(void) {
 		imu_measurement.gyro_z.value = read_gyro_z();
 		
 		//send measurements
-		//for( i = 0; i < 5000; i++){
-		//}
+		for( i = 0; i < 20000; i++){
+		}
 		//radio_loadPacket(13);
 		//radio_txNow();
 		send_imu_packet(imu_measurement);
