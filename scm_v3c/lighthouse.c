@@ -944,7 +944,7 @@ void lh_int_cb(int level){
 			#endif
 			
 
-			
+		/*
 		pulse_width = (uint32_t)((timestamp_fall - timestamp_rise)*HCLOCK_ERROR);
 			// Identify what kind of pulse this was
 			//pulse_type = 5;
@@ -980,11 +980,11 @@ void lh_int_cb(int level){
 		
 		val = pulse_width >= 1400 || pulse_width < 100 ;
 		idx += val*5;
-		
+		*/
 		
 				//for(i = 0; i < 100; i++);
 			//classify_pulse(timestamp_rise, timestamp_fall);
-			//update_state(idx,timestamp_rise);
+			update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
 			//send_lh_packet(1,1, A, AZIMUTH);
 			
 			//enable active high interrupt
