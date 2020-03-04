@@ -250,22 +250,14 @@ int main(void) {
 	// Number of data points to gather before printing		
 	target_num_data_points = 120;
 	
-	/*
-	while(1){
-		imu_data_t imu_measurement;  
-		for( i = 0; i < 100000; i++);
-		//current_gpio = GPIO_REG__INPUT;
-		//imu_measurement.acc_x.value = current_gpio;
-		//send_imu_packet(imu_measurement);
-		test_imu_life();
-	}*/
-	
+
 	// The optical_data_raw signal is not synchronized to HCLK domain so could possibly see glitching problems	
 	last_gpio = current_gpio;	
 	current_gpio = (0x8 & GPIO_REG__INPUT) >> 3;	
 
 	test_imu_life();
 	
+	//initialize imu
 	write_imu_register(0x06,0x41);
 	for(i=0; i<50000; i++);
 	write_imu_register(0x06,0x01);
@@ -278,10 +270,8 @@ int main(void) {
 		//store measurement
 		imu_data_t imu_measurement;  
 		
-				
-		//test_imu_life();
-		//GPIO_REG__OUTPUT = ~GPIO_REG__OUTPUT;
 		
+		//get imu measurements
 		imu_measurement.acc_x.value = read_acc_x();
 		imu_measurement.acc_y.value = read_acc_y();
 		imu_measurement.acc_z.value = read_acc_z();
@@ -294,28 +284,6 @@ int main(void) {
 		}
 		send_imu_packet(imu_measurement);
 		
-		//use interrupts intesad of polling
-		/*
-		// Read GPIO<3> (optical_data_raw - this is the digital output of the optical receiver)	
-		// The optical_data_raw signal is not synchronized to HCLK domain so could possibly see glitching problems	
-		last_gpio = current_gpio;	
-		current_gpio = (0x8 & GPIO_REG__INPUT) >> 3;	
-
-		// Detect rising edge	
-		if(last_gpio == 0 && current_gpio == 1){	
-
-			// Save when this event happened	
-			timestamp_rise = RFTIMER_REG__COUNTER;	
-
-		}	
-
-		// Detect falling edge	
-		else if(last_gpio == 1 && current_gpio == 0){	
-
-			// Save when this event happened	
-			timestamp_fall = RFTIMER_REG__COUNTER;	
-
-			update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);	
-		}	*/
+		
 	}
 }
