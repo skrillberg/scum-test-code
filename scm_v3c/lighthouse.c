@@ -19,11 +19,11 @@
 
 #define QX3_FINE 25
 #define QX3_MID 25
-#define LC_COARSE 23
+#define LC_COARSE 24
 
 #define HCLOCK_ERROR 924/1000
 
-char send_packet[127];
+uint8_t send_packet[127];
 
 static bool lh_packet_ready;
 
@@ -634,7 +634,7 @@ void send_imu_packet(imu_data_t imu_measurement){
 	//set lo frequency
 	//original: LC_FREQCHANGE(23&0x1F, 2&0x1F, 6&0x1F); //for pa
 	//LC_FREQCHANGE(23&0x1F, 21&0x1F, 8&0x1F);
-	LC_FREQCHANGE(23&0x1F, QX3_MID&0x1F, QX3_FINE&0x1F);
+	LC_FREQCHANGE(LC_COARSE&0x1F, QX3_MID&0x1F, QX3_FINE&0x1F);
 	//wait for 1000 loop cycles
 	
 	for(i = 0; i<1000; i++){
