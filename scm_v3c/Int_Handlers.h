@@ -68,6 +68,7 @@ extern unsigned short current_RF_channel;
 extern unsigned short do_debug_print;
 
 static interrupt_state = 0;
+volatile int lh_in_progress = 0;
 
 void UART_ISR(){	
 	static char i=0;
@@ -716,11 +717,19 @@ void INTERRUPT_GPIO3_ISR(){
 }
 void INTERRUPT_GPIO8_ISR(){
 	//call lh cb for high level
-	lh_int_cb(1);
+	if(!lh_in_progress){
+		lh_in_progress = 1;
+		lh_int_cb(1);
+	}
+	lh_in_progress = 0;
 }
 void INTERRUPT_GPIO9_ISR(){
 	//call lh cb for low level
-	lh_int_cb(0);
+	if(!lh_in_progress){
+		lh_in_progress = 1;
+		lh_int_cb(0);
+	}
+	lh_in_progress = 0;
 }
 void INTERRUPT_GPIO10_ISR(){
 	printf("External Interrupt GPIO10 triggered\n");
