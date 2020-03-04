@@ -852,7 +852,7 @@ void lh_int_cb(int level){
 	static uint8_t debounce_count_low=0;
 	static uint32_t timestamp_rise = 0;
 	static uint32_t timestamp_fall = 0;
-	
+	send_lh_packet(1,1, A, AZIMUTH);
 	//detect edge transitions and disable level interrupts to mimic edge behavior
 	
 	//check for rising edge
