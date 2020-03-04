@@ -411,12 +411,14 @@ void send_lh_packet(unsigned int sync_time, unsigned int laser_time, lh_id_t lig
 					radio_txNow();
 }
 pulse_type_t classify_pulse(unsigned int timestamp_rise, unsigned int timestamp_fall){
+	
   pulse_type_t pulse_type;
+	
 	uint32_t pulse_width;
 	
 	pulse_width = (timestamp_fall - timestamp_rise)*HCLOCK_ERROR;
 	pulse_type = INVALID;
-
+	return INVALID;
 	// Identify what kind of pulse this was
 
 	if(pulse_width < 585 + WIDTH_BIAS && pulse_width > 100 + WIDTH_BIAS) pulse_type = LASER; // Laser sweep (THIS NEEDS TUNING)
