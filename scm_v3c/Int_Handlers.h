@@ -717,6 +717,7 @@ void INTERRUPT_GPIO3_ISR(){
 }
 void INTERRUPT_GPIO8_ISR(){
 	//call lh cb for high level
+	ICER = 0xFFFF;
 	if(!lh_in_progress){
 		lh_in_progress = 1;
 		lh_int_cb(1);
@@ -725,6 +726,8 @@ void INTERRUPT_GPIO8_ISR(){
 }
 void INTERRUPT_GPIO9_ISR(){
 	//call lh cb for low level
+		//clear all
+	ICER = 0xFFFF;
 	if(!lh_in_progress){
 		lh_in_progress = 1;
 		lh_int_cb(0);

@@ -865,6 +865,7 @@ unsigned int sync_pulse_width_compensate(unsigned int pulse_width){
 //callback that is called by gpio ints
 //level parameter is what level the interrupt is at (high or low).
 void lh_int_cb(int level){
+
 	//Keep track of static duration level state
 	static int state = 0; 
 	static bool debounced=false;
@@ -986,7 +987,11 @@ void lh_int_cb(int level){
 			//update_state(idx,timestamp_rise);
 			//send_lh_packet(1,1, A, AZIMUTH);
 			
-
+			//enable active high interrupt
+			ISER = GPIO8_HIGH_INT;
+			
+			//clear interrupt
+			ICPR = GPIO8_HIGH_INT;
 		}
 		
 	}
