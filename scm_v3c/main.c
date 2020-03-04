@@ -264,13 +264,13 @@ int main(void) {
 	last_gpio = current_gpio;	
 	current_gpio = (0x8 & GPIO_REG__INPUT) >> 3;	
 
-	//test_imu_life();
-	/*
+	test_imu_life();
+	
 	write_imu_register(0x06,0x41);
 	for(i=0; i<50000; i++);
 	write_imu_register(0x06,0x01);
 	for(i=0; i<50000; i++);
-	*/
+	
 	LC_FREQCHANGE(23&0x1F, 25&0x1F, 25&0x1F);
 	//start localization loop
 	radio_txEnable();
