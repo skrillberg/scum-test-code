@@ -876,6 +876,10 @@ void lh_int_cb(int level){
 	//send_lh_packet(1,1, A, AZIMUTH);
 	//detect edge transitions and disable level interrupts to mimic edge behavior
 	
+	 pulse_type_t pulse_type;
+	int i =0;
+	uint32_t pulse_width;	
+	
 	//check for rising edge
 	if(level == 1 && state == 0){
 		if(debounce_count_high == 0){
@@ -938,6 +942,43 @@ void lh_int_cb(int level){
 			#if DEBUG_INT == 1
 				send_lh_packet(1,1, A, AZIMUTH);
 			#endif
+			
+
+			
+			pulse_width = (timestamp_fall - timestamp_rise)*HCLOCK_ERROR;
+			// Identify what kind of pulse this was
+			pulse_type = INVALID;
+			
+			if(pulse_width < 585 + WIDTH_BIAS && pulse_width > 100 + WIDTH_BIAS){
+				pulse_type = 4; // Laser sweep (THIS NEEDS TUNING)
+			}
+			else if(pulse_width < 675 + WIDTH_BIAS && pulse_width > 585 + WIDTH_BIAS){
+				pulse_type = 0; // Azimuth sync, data=0, skip = 0
+			}
+			else if(pulse_width >= 675 + WIDTH_BIAS && pulse_width < 781 + WIDTH_BIAS){
+				pulse_type = 2; // Elevation sync, data=0, skip = 0
+			}
+			else if(pulse_width >= 781 + WIDTH_BIAS && pulse_width < 885 + WIDTH_BIAS){
+				pulse_type = 0; // Azimuth sync, data=1, skip = 0
+			}
+			else if(pulse_width >= 885 + WIDTH_BIAS && pulse_width < 989 + WIDTH_BIAS){
+				pulse_type = 2; // Elevation sync, data=1, skip = 0
+			}
+			else if(pulse_width >= 989 + WIDTH_BIAS && pulse_width < 1083 + WIDTH_BIAS){
+				pulse_type = 1; //Azimuth sync, data=0, skip = 1
+			}
+			else if(pulse_width >= 1083 + WIDTH_BIAS && pulse_width < 1200 + WIDTH_BIAS){
+				pulse_type = 3; //elevation sync, data=0, skip = 1
+			}
+			else if(pulse_width >= 1200 + WIDTH_BIAS && pulse_width < 1300 + WIDTH_BIAS){
+				pulse_type = 1; //Azimuth sync, data=1, skip = 1
+			}
+			else if(pulse_width >= 1300 + WIDTH_BIAS && pulse_width < 1400 + WIDTH_BIAS){
+				pulse_type = 3; //Elevation sync, data=1, skip = 1
+			}else{
+				pulse_type = 5;
+			}
+					
 			classify_pulse(timestamp_rise, timestamp_fall);
 			//update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
 
