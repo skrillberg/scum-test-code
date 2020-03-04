@@ -716,12 +716,12 @@ void INTERRUPT_GPIO3_ISR(){
 }
 void INTERRUPT_GPIO8_ISR(){
 	//call lh cb for high level
-	ICER = 0xFFFF;
+	//ICER = 0xFFFF;
 	lh_int_cb(1);
 }
 void INTERRUPT_GPIO9_ISR(){
 	//call lh cb for low level
-	ICER = 0xFFFF;
+	//ICER = 0xFFFF;
 	lh_int_cb(0);
 }
 void INTERRUPT_GPIO10_ISR(){
