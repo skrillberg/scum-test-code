@@ -506,10 +506,10 @@ void debounce_gpio(unsigned short gpio, unsigned short * gpio_out, unsigned int 
 //keeps track of the current state and will print out pulse train information when it's done.
 void update_state(pulse_type_t pulse_type, unsigned int timestamp_rise){
 	
-	
+	/*
 	if(pulse_type == INVALID){
 		return;
-	}
+	}*/
 	// FSM which searches for the four pulse sequence
 			// An output will only be printed if four pulses are found and the sync pulse widths
 			// are within the bounds listed above.
