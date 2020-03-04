@@ -412,7 +412,7 @@ void send_lh_packet(unsigned int sync_time, unsigned int laser_time, lh_id_t lig
 }
 pulse_type_t classify_pulse(unsigned int timestamp_rise, unsigned int timestamp_fall){
   pulse_type_t pulse_type;
-	unsigned int pulse_width;
+	uint32_t pulse_width;
 	
 	pulse_width = (timestamp_fall - timestamp_rise)*HCLOCK_ERROR;
 	pulse_type = INVALID;
