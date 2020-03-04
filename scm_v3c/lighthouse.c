@@ -371,11 +371,12 @@ void radio_init_rx_MF_lighthouse(){
 //call radio rx_now
 //if you hear a packet, rx_done runs and thats where things could be found (acks) 
 void send_lh_packet(unsigned int sync_time, unsigned int laser_time, lh_id_t lighthouse, angle_type_t angle_type){
-
 					int i;
 					if(USE_RADIO == 0){
 						return;
 					}
+					return;
+
 						//turn on radio (radio_txenable)
 					radio_txEnable();
 					//enable radio interrupts (radio_enable_interrupts) (do this somewhere; only needs to be done once)
@@ -879,7 +880,7 @@ void lh_int_cb(int level){
 			ICPR = GPIO9_LOW_INT;
 			//
 			#if DEBUG_INT == 1
-				//send_lh_packet(2,2, A, AZIMUTH);
+				send_lh_packet(2,2, A, AZIMUTH);
 			#endif
 		}
 	}
@@ -912,11 +913,10 @@ void lh_int_cb(int level){
 			ICPR = GPIO8_HIGH_INT;
 			
 			#if DEBUG_INT == 1
-				//send_lh_packet(1,1, A, AZIMUTH);
+				send_lh_packet(1,1, A, AZIMUTH);
 			#endif
 			
-			//update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
-			//send_lh_packet(timestamp_rise,timestamp_fall,A,AZIMUTH);
+			update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
 		}
 	}
 }
