@@ -916,7 +916,7 @@ void lh_int_cb(int level){
 			#if DEBUG_INT == 1
 				send_lh_packet(1,1, A, AZIMUTH);
 			#endif
-			
+			classify_pulse(timestamp_rise, timestamp_fall);
 			//update_state(classify_pulse(timestamp_rise, timestamp_fall),timestamp_rise);
 
 		}
