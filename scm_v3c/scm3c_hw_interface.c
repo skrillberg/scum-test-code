@@ -1232,6 +1232,7 @@ void initialize_mote(){
     // Init divider settings
     radio_init_divider(2000);
     
+		set_PA_supply(63);
     // Program analog scan chain
     analog_scan_chain_write();
     analog_scan_chain_load();
