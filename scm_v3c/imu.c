@@ -10,22 +10,23 @@ void ICM_SelectBank(uint8_t bank) {
 void init_compass(){
 		int i;
 		write_imu_register(0x7F, 0x00); // Select user bank 0
-		for(i=0; i<50000; i++);
+		for(i=0; i<10000; i++);
 		write_imu_register(0x0F, 0x30); //INT Pin / Bypass Enable Configuration
-		for(i=0; i<50000; i++);
+		for(i=0; i<10000; i++);
 		write_imu_register(0x03, 0x20); //I2C_MST_EN
-		for(i=0; i<50000; i++);
+		for(i=0; i<10000; i++);
 		write_imu_register(0x7F, 0x30); //select user bank 3
-		for(i=0; i<50000; i++);
+		for(i=0; i<10000; i++);
 		write_imu_register(0x01, 0x4D); // I2C Master mode and Speed 400 kHz
-		for(i=0; i<50000; i++);
+		for(i=0; i<10000; i++);
 		write_imu_register(0x02, 0x01); // I2C_SLV0 _DLY_ enable
-		for(i=0; i<50000; i++);
+		for(i=0; i<10000; i++);
 		write_imu_register(0x05, 0x81); // enable IIC	and EXT_SENS_DATA==1 Byte
+		for(i=0; i<10000; i++);
 
 		// Initialize magnetometer
 		i2c_Mag_write(0x32, 0x01); // Reset AK8963
-		for(i=0; i<50000; i++);
+		for(i=0; i<10000; i++);
 		i2c_Mag_write(0x31, 0x02); // use i2c to set AK8963 working on Continuous measurement mode1 & 16-bit output
 }
 
