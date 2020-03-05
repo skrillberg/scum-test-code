@@ -272,7 +272,7 @@ int main(void) {
 		//store measurement
 		imu_data_t imu_measurement;  
 		int16_t magn[3];
-		ICM_ReadMag( magn);
+		//ICM_ReadMag( magn);
 		
 		//get imu measurements
 		imu_measurement.acc_x.value = magn[0];
