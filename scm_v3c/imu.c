@@ -35,16 +35,16 @@ void i2c_Mag_write(uint8_t reg,uint8_t value)
 		int i;
   	write_imu_register(0x7F, 0x30);
 
-		for(i=0; i<500; i++);
+		for(i=0; i<1000; i++);
   	write_imu_register(0x03 ,0x0C);//mode: write
 
-		for(i=0; i<500; i++);
+		for(i=0; i<1000; i++);
   	write_imu_register(0x04 ,reg);//set reg addr
 
-		for(i=0; i<500; i++);
+		for(i=0; i<1000; i++);
   	write_imu_register(0x06 ,value);//send value
 
-		for(i=0; i<500; i++);
+		for(i=0; i<1000; i++);
   }
 
  uint8_t ICM_Mag_Read(uint8_t reg)
@@ -52,16 +52,16 @@ void i2c_Mag_write(uint8_t reg,uint8_t value)
   	uint8_t  Data;
 		int i;
   	write_imu_register(0x7F, 0x30);
-		for(i=0; i<100; i++);
+		for(i=0; i<1000; i++);
   	write_imu_register(0x03 ,0x0C|0x80);
-		for(i=0; i<100; i++);
+		for(i=0; i<1000; i++);
   	write_imu_register(0x04 ,reg);// set reg addr
-		for(i=0; i<100; i++);
+		for(i=0; i<1000; i++);
   	write_imu_register(0x06 ,0xff);//read
-		for(i=0; i<100; i++);
+		for(i=0; i<1000; i++);
   	write_imu_register(0x7F, 0x00);
   	Data = read_imu_register(0x3B);
-		for(i=0; i<100; i++);
+		for(i=0; i<1000; i++);
   	return Data;
   }
 
