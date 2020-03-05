@@ -16,6 +16,7 @@
 #include "scum_radio_bsp.h"
 #include "lighthouse.h"
 #include "spi.h"
+#include "imu.h"
 
 extern unsigned int current_lfsr;
 
@@ -262,6 +263,7 @@ int main(void) {
 	for(i=0; i<50000; i++);
 	write_imu_register(0x06,0x01);
 	for(i=0; i<50000; i++);
+	init_compass();
 	
 	//start localization loop
 	while(1) {
@@ -269,12 +271,13 @@ int main(void) {
 
 		//store measurement
 		imu_data_t imu_measurement;  
-		
+		int16_t magn[3];
+		ICM_ReadMag( magn);
 		
 		//get imu measurements
-		imu_measurement.acc_x.value = read_acc_x();
-		imu_measurement.acc_y.value = read_acc_y();
-		imu_measurement.acc_z.value = read_acc_z();
+		imu_measurement.acc_x.value = magn[0];
+		imu_measurement.acc_y.value = magn[1];
+		imu_measurement.acc_z.value = magn[2];
 		imu_measurement.gyro_x.value = read_gyro_x(); 
 		imu_measurement.gyro_y.value = read_gyro_y(); 
 		imu_measurement.gyro_z.value = read_gyro_z();
