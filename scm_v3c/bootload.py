@@ -1,7 +1,7 @@
 import serial
 import random
 
-def program_cortex(teensy_port="COM15", uart_port="COM18", file_binary="./code.bin",
+def program_cortex(teensy_port="COM3", uart_port=None, file_binary="./code.bin",
 		boot_mode='optical', skip_reset=False, insert_CRC=False,
 		pad_random_payload=False):
 	"""
@@ -137,7 +137,7 @@ def program_cortex(teensy_port="COM15", uart_port="COM18", file_binary="./code.b
 
 if __name__ == "__main__":
 	programmer_port = "COM3"
-	scm_port = "COM12"
+	scm_port = None
 
 	program_cortex_specs = dict(teensy_port=programmer_port,
 								uart_port=scm_port,
